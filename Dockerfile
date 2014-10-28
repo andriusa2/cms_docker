@@ -8,8 +8,8 @@ RUN apt-get -y install \
     iso-codes shared-mime-info stl-manual python-beautifulsoup \
     python-mechanize python-coverage python-mock cgroup-lite python-requests \
     python-werkzeug python-gevent python-yaml python-sphinx \
-	\
-	git
+    \
+    git
 
 RUN git clone git://github.com/cms-dev/cms.git /cms -b v1.1.0
 RUN cd /cms && ./setup.py build && ./setup.py install && rm -rf /cms
