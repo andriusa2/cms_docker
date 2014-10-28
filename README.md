@@ -10,7 +10,7 @@ How to run this
 First, configure `cms.conf` and `cms.ranking.conf` to reflect your environment.
 Then, start the containers:
 
-```
+```shell
 $ docker build -t motiejus/cms_docker:v1.1.0 . # optional
 $ docker run --privileged -ti --net=host \
 	-v ${PWD}/cms.conf.sample:/etc/cms.conf \
