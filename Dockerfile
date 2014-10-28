@@ -14,6 +14,4 @@ RUN apt-get -y install \
 RUN git clone git://github.com/cms-dev/cms.git /cms -b v1.1.0
 RUN cd /cms && ./setup.py build && ./setup.py install && rm -rf /cms
 
-CMD ([ -f /etc/cms.conf ] && [ -f /etc/cms.ranking.conf ] || \
-	(echo "missing /etc/cms(.ranking).conf" && exit 1)) && \
-	cgroups-mount && cmsResourceService -a
+CMD cgroups-mount && cmsResourceService -a
