@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y install \
     \
     git
 
-RUN git clone git://github.com/lmio/cms.git /cms -b lmio2015
+RUN git clone git://github.com/lmio/cms.git /cms -b boi2014
 RUN cd /cms && ./setup.py build && ./setup.py install && rm -rf /cms
 
 CMD cgroups-mount && cmsResourceService -a
