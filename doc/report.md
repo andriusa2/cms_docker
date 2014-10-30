@@ -25,11 +25,11 @@ respectively).
 
 Some observations. Like seen in the graphs below, management machine was mostly idle.
 
-![Management machine utilization graphs](https://cloud.githubusercontent.com/assets/107720/4853135/3416cfbc-6083-11e4-8787-1c50850d4118.png)
+![Management machine utilization graphs](https://cloud.githubusercontent.com/assets/107720/4853139/342328fc-6083-11e4-8eaa-73b79995c424.png)
 
 Database machine was not too busy either:
 
-![Database machine utilization graphs](https://cloud.githubusercontent.com/assets/107720/4853139/342328fc-6083-11e4-8eaa-73b79995c424.png)
+![Database machine utilization graphs](https://cloud.githubusercontent.com/assets/107720/4853135/3416cfbc-6083-11e4-8787-1c50850d4118.png)
 
 **Problematic parts**
 
