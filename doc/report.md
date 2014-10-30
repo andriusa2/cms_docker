@@ -179,5 +179,9 @@ Percentage of the requests served within a certain time (ms)
  100%   5110 (longest request)
 ```
 
+A million requests were also tried, it worked reliably. Just connection count to the database kept slowly steadily increasing. But since the connection increase rate is so small, we can ignore the problem.
+
 Conclusion: with TCP connection reuse and no-bullshit database, it is possible
 to reliably issue lots of requests to ContestWebService.
+
+[cms-boi2014](https://github.com/lmio/cms/tree/boi2014) fork was tested (pre-1.1.0).
