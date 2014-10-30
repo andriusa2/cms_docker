@@ -44,10 +44,10 @@ Web traffic
 
 Making web servers (ContestWebService) scale was more problematic. Test
 methodology: set up the web service, ``ab`` on a url with a cookie that
-authorizes a user.
+understands user is logged in (so we do not hit the redirect all the time).
 
-I understand this does not fully exercise the system, but sounds like good
-enough to test basic web service performance.
+I understand this does not fully exercise the system because it does not
+load submissions, but sounds like good enough to test basic web service performance.
 
 Some observations:
 
