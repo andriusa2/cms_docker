@@ -25,11 +25,11 @@ respectively).
 
 Some observations. Like seen in the graphs below, management machine was mostly idle.
 
-.. image: mgmt.png
+.. image: https://cloud.githubusercontent.com/assets/107720/4853135/3416cfbc-6083-11e4-8787-1c50850d4118.png
 
 Database machine was not too busy either:
 
-.. image: rds.png
+.. image: https://cloud.githubusercontent.com/assets/107720/4853139/342328fc-6083-11e4-8eaa-73b79995c424.png
 
 **Problematic parts**
 
@@ -95,7 +95,7 @@ Logical setup:
   I did not yet know ``tcp_tw_recycle`` `can be dangerous
   <http://kaivanov.blogspot.nl/2010/09/linux-tcp-tuning.html>`.
 
-.. image: working.png
+.. image: https://cloud.githubusercontent.com/assets/107720/4853138/3420d110-6083-11e4-8f45-370c86b53e8e.png
 
 **Problematic database**
 
@@ -110,9 +110,9 @@ db.t2.medium allows 291 connections. The (unofficial) formula is
 ``DBInstanceClassMemory/12582880``, which, for db.r3.8xlarge, is around 19k.
 This is enough for our purposes:
 
-.. image: db_2.png
+.. image: https://cloud.githubusercontent.com/assets/107720/4853137/341fc996-6083-11e4-8a72-1c7e2b1d55b7.png
 
-.. image: db_2b.png
+.. image: https://cloud.githubusercontent.com/assets/107720/4853136/341d9aa4-6083-11e4-9f04-c14865be2afc.png
 
 With all that changed, the setup was able to do about 980 requests per second
 (there were more runs with higher rates, but I logged only this)::
