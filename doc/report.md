@@ -181,7 +181,14 @@ Percentage of the requests served within a certain time (ms)
 
 A million requests were also tried, it worked reliably. Just connection count to the database kept slowly steadily increasing. But since the connection increase rate is so small, we can ignore the problem.
 
-Conclusion: with TCP connection reuse and no-bullshit database, it is possible
-to reliably issue lots of requests to ContestWebService.
 
 [cms-boi2014](https://github.com/lmio/cms/tree/boi2014) fork was tested (pre-1.1.0).
+
+Final remarks
+-------------
+
+* Free graphs of mostly everything. It is **so damn useful**.
+* ELB. No need to worry about slow clients. Also, web service usage graphs are free. Great start to troubleshoot (e.g. number of 500s).
+* Even the most wimpy virtual machines feel really fast. I have never used AWS seriously before (due to the fact that my previous employer had an in-house OpenStack cluster). `yum install` on AWS is a remarkably good experience.
+* Docker was a great help here. For example, starting the cmsWorker takes around 1 minute on a newly installed machine (`yum install docker`, `scp cms.conf`, `docker run <args>`).
+* Amazon Linux is a nice Linux distribution.
