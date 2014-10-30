@@ -11,7 +11,7 @@ case "${1--h}" in
         >&2 echo "when one wants a web service per container. Example usage:"
         >&2 echo
         >&2 echo "  $ $0 cms.conf | xargs docker run --net=host \\"
-	    >&2 echo "        -v \${PWD}/cms.conf:/usr/local/etc/cms.conf \\"
+        >&2 echo "        -v \${PWD}/cms.conf:/usr/local/etc/cms.conf \\"
         >&2 echo "        motiejus/cms_docker:v1.1.0-1 cmsContestWebServer"
         exit 1
     ;;
