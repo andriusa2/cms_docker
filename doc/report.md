@@ -27,7 +27,7 @@ Some observations. Like seen in the graphs below, management machine was mostly 
 
 ![Management machine utilization graphs](https://cloud.githubusercontent.com/assets/107720/4853139/342328fc-6083-11e4-8eaa-73b79995c424.png)
 
-Database machine was not too busy either:
+Database machine moderately busy (submission testing started around 10:50):
 
 ![Database machine utilization graphs](https://cloud.githubusercontent.com/assets/107720/4853135/3416cfbc-6083-11e4-8787-1c50850d4118.png)
 
