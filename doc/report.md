@@ -8,6 +8,8 @@ Keywords/glossary:
 * Amazon RDS (Relational Database Service)
 * Amazon ELB (Elastic Load Balancer)
 
+Purpose: we are organizing a contest with ~750 participants and want to know if CMS will hold.
+
 Testing workers
 ---------------
 
