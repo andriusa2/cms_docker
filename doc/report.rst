@@ -61,6 +61,7 @@ Some observations:
 * ``TIME_WAIT`` sockets is a big deal. More on that later.
 
 Machine setup:
+
 * 2*c3.8xlarge (32 vCPU, 60 GiB RAM): ContestWebService.
 * db.r3.8xlarge (32 vCPU, 244 GiB RAM): hosted PostgreSQL database (AWS RDS).
 * t2.medium (2 vCPU, 4GiB RAM). All management: LogService, EvaluationService, etc.
@@ -77,6 +78,7 @@ Logical setup:
   launched using a simple `shell script
   <https://github.com/Motiejus/cms_docker/blob/boi2014/dockers>`.
 * ::
+
     echo 1 | sudo tee /proc/sys/net/ipv4/tcp_tw_reuse
     echo 1 | sudo tee /proc/sys/net/ipv4/tcp_tw_recycle
 
@@ -172,8 +174,6 @@ With all that changed, the setup was able to do about 980 requests per second
       98%     66
       99%     74
      100%   5110 (longest request)
-
-Load
 
 Conclusion: with TCP connection reuse and no-bullshit database, it is possible
 to reliably issue lots of requests to ContestWebService.
