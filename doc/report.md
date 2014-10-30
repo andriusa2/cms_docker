@@ -39,6 +39,10 @@ before that, weird things happen. Also, the database shouldn not be *too slow*
 
 Conclusion: this is adequate.
 
+Screenshot of random point in time running the benchmarks:
+
+![Benchmark in progress](https://cloud.githubusercontent.com/assets/107720/4853138/3420d110-6083-11e4-8f45-370c86b53e8e.png)
+
 Web traffic
 -----------
 
@@ -77,7 +81,8 @@ Logical setup:
   these services had to be configured in ``cms.conf``.  After that they were
   launched using a simple
   [shell script](https://github.com/Motiejus/cms_docker/blob/boi2014/dockers).
-* ```
+* This is important:
+  ```
     echo 1 | sudo tee /proc/sys/net/ipv4/tcp_tw_reuse
     echo 1 | sudo tee /proc/sys/net/ipv4/tcp_tw_recycle
   ```
@@ -93,8 +98,6 @@ Logical setup:
   For the cautious, `tcp_tw_reuse` alone might be enough. But during testing I
   did not yet know `tcp_tw_recycle`
   [can be dangerous](http://kaivanov.blogspot.nl/2010/09/linux-tcp-tuning.html).
-
-![Benchmark in progress](https://cloud.githubusercontent.com/assets/107720/4853138/3420d110-6083-11e4-8f45-370c86b53e8e.png)
 
 **Problematic database**
 
