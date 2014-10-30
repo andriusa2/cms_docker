@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+case "${1--h}" in
+    -h | --help)
+        >&2 echo "usage: $0 [-h | --help] cms.conf"
+        >&2 echo
+        >&2 echo "Return shard numbers of ContestWebServer on this host. Useful"
+        >&2 echo "when one wants a web service per container. Example usage:"
+        >&2 echo
+        >&2 echo "  $ $0 cms.conf | xargs docker run --net=host \\"
+	    >&2 echo "        -v \${PWD}/cms.conf:/usr/local/etc/cms.conf \\"
+        >&2 echo "        motiejus/cms_docker:v1.1.0-1 cmsContestWebServer"
+        exit 1
+    ;;
+esac
+
+PROGRAM='
+import json,sys;from itertools import count
+ws = json.load(sys.stdin)["core_services"]["ContestWebServer"]
+print("\n".join(["%d %s" % (i,a) for i,(a,_) in zip(count(), ws)]))'
+
+for IPHOST in $(python -c "$PROGRAM" < $1); do
+    IP1=$(echo "$IPHOST" | cut -f2 -d" ")
+    for IP2 in $(hostname -I | sed 's/ /\t/g'); do
+        [ "$IP1" = "$IP2" ] && echo "$IPHOST" | cut -f1 -d" "
+    done
+done
