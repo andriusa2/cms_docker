@@ -16,8 +16,7 @@ case "${1--h}" in
     ;;
 esac
 
-PROGRAM='
-import json,sys;from itertools import count
+PROGRAM='import json,sys;from itertools import count
 ws = json.load(sys.stdin)["core_services"]["ContestWebServer"]
 print("\n".join(["%d %s" % (i,a) for i,(a,_) in zip(count(), ws)]))'
 
