@@ -9,12 +9,13 @@ ExecStart=/opt/bin/systemd-docker run \
     --net=host \
     --env HOST_NAME=%H --env GRAPHITE_HOST=localhost \
     --rm --name %n andreasjansson/collectd-write-graphite
+
 Restart=always
 RestartSec=10s
 Type=notify
 NotifyAccess=all
-TimeoutStartSec=120
-TimeoutStopSec=15
+TimeoutStartSec=600
+TimeoutStopSec=60
 
 [Install]
 WantedBy=multi-user.target

@@ -18,8 +18,8 @@ Restart=always
 RestartSec=10s
 Type=notify
 NotifyAccess=all
-TimeoutStartSec=120
-TimeoutStopSec=15
+TimeoutStartSec=600
+TimeoutStopSec=60
 
 [Install]
 WantedBy=multi-user.target
