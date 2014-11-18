@@ -1,0 +1,25 @@
+[Unit]
+Description=graphite server
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin \
+    ibuildthecloud/systemd-docker
+ExecStartPre=mkdir -p /storage && chmod 777 /storage
+ExecStartPre=/bin/sh -c '[ ! -f /storage/graphite.db ] && \
+        /usr/bin/docker run --rm -v /storage/:/mnt/ \
+        cdegroot/collectd-graphite:1.0 cp -a /opt/graphite/storage/. /mnt || :'
+ExecStart=/opt/bin/systemd-docker run --net=host \
+    -v /storage/:/opt/graphite/storage/ \
+    --rm --name %n cdegroot/collectd-graphite:1.0
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=120
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

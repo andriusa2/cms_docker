@@ -1,0 +1,20 @@
+[Unit]
+Description=graphite server
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run \
+    --net=host \
+    --env HOST_NAME=%H --env GRAPHITE_HOST=localhost \
+    --rm --name %n andreasjansson/collectd-write-graphite
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=120
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target
