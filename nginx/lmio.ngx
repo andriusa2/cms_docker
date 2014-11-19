@@ -39,7 +39,7 @@ upstream vyr {
     server 127.0.0.1:9031;
 }
 
-server mgmt {
+upstream mgmt {
     server 172.31.2.1:8889;
 }
 
