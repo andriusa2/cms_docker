@@ -39,6 +39,10 @@ upstream vyr {
     server 127.0.0.1:9031;
 }
 
+server mgmt {
+    server 172.31.2.1:8889;
+}
+
 server {
     listen 80 default_server;
 
@@ -57,4 +61,12 @@ server {
         proxy_next_upstream off;
         add_header X-upstream $upstream_addr;
     }
+
+    location /centriukas/ {
+        auth_basic "Restricted";
+        auth_basic_user_file /etc/nginx/htpasswd;
+        proxy_pass http://mgmt/;
+        client_max_body_size 100M;
+    }
+
 }
