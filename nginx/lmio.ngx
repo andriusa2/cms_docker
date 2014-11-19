@@ -73,10 +73,15 @@ server {
         client_max_body_size 100M;
     }
 
-    location /graphite/ {
+}
+
+server {
+    listen 80;
+    server_name graphite.cms.lmio.lt;
+
+    location / {
         auth_basic "Restricted";
         auth_basic_user_file /etc/nginx/htpasswd;
         proxy_pass http://graphite/;
     }
-
 }
