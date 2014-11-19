@@ -5,7 +5,8 @@ RUN apt-get update && apt-get -y install software-properties-common && \
     apt-get install -y nginx
 ADD lmio.ngx /etc/nginx/sites-enabled/
 ADD index.html /var/www/html/
+RUN rm /etc/nginx/sites-enabled/default
 
 RUN echo "daemon off; error_log /dev/stdout;" >> /etc/nginx/nginx.conf
-EXPOSE 8081
+EXPOSE 80
 CMD /usr/sbin/nginx
