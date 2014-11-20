@@ -57,13 +57,11 @@ server {
 
     location /jau/ {
         proxy_pass http://jau/;
-        proxy_next_upstream off;
         add_header X-upstream $upstream_addr;
     }
 
     location /vyr/ {
         proxy_pass http://vyr/;
-        proxy_next_upstream off;
         add_header X-upstream $upstream_addr;
     }
 
