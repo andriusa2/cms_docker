@@ -1,0 +1,6 @@
+# Begin init_db.txt
+
+docker run -ti --net=host -v /home/core/cms.conf:/usr/local/etc/cms.conf lmio/cms:lmio2015 cmsInitDB
+
+# End init_db.txt
+

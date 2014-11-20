@@ -1,0 +1,31 @@
+#!/bin/bash
+# Begin graphite-write.service
+set -euo pipefail
+cat > /etc/systemd/system/graphite-write.service <<EOF
+[Unit]
+Description=write stats to graphite
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run \
+    --net=host \
+    --env HOST_NAME=%H --env GRAPHITE_HOST=172.31.2.9 \
+    --rm --name %n andreasjansson/collectd-write-graphite
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable graphite-write.service
+systemctl start graphite-write.service || :
+# End graphite-write.service
+

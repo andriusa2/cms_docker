@@ -1,0 +1,18 @@
+[Unit]
+Description=cmsStatsGraphite
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run --net=host    -v /home/core/cms.conf:/usr/local/etc/cms.conf     --rm --name %n lmio/cms:lmio2015 sh -c 'ln -sf /usr/share/zoneinfo/Europe/Vilnius /etc/localtime && cmsStatsGraphite'
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target

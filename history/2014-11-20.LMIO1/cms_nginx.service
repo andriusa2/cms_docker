@@ -1,0 +1,27 @@
+# Begin cms_nginx.service
+cat > /etc/systemd/system/cms_nginx.service <<EOF
+[Unit]
+Description=CMS NGINX service
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run --net=host \
+    --rm --name %n motiejus/cms_nginx
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable cms_nginx.service
+systemctl start cms_nginx.service || :
+# End cms_nginx.service
+

@@ -1,0 +1,50 @@
+# Begin cws.service
+cat > /etc/systemd/system/cws1@.service <<EOF
+[Unit]
+Description=cwsResourceService in a container
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run --net=host \\
+   -v /home/core/cms.conf:/usr/local/etc/cms.conf \\
+   --rm --name %p.%i lmio/cms:lmio2015 \\
+   sh -c 'ln -sf /usr/share/zoneinfo/Europe/Vilnius /etc/localtime && cmsContestWebServer -c 1 %i'
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sed 's/cmsContestWebServer -c 1/cmsContestWebServer -c 2/' \
+    /etc/systemd/system/cws1@.service > /etc/systemd/system/cws2@.service
+
+for i in `seq 0 2`; do
+    systemctl enable cws1@${i}.service
+    systemctl start cws1@${i}.service || :
+done
+
+for i in `seq 3 7`; do
+    systemctl enable cws2@${i}.service
+    systemctl start cws2@${i}.service || :
+done
+
+#for i in `seq 0 4`; do
+#    systemctl enable cws1@${i}.service
+#    systemctl start cws1@${i}.service || :
+#done
+#
+#for i in `seq 5 31`; do
+#    systemctl enable cws2@${i}.service
+#    systemctl start cws2@${i}.service || :
+#done
+
+# End cws.service
+
