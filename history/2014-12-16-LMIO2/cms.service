@@ -1,0 +1,30 @@
+# Begin cms.service
+cat > /etc/systemd/system/cms@.service <<EOF
+[Unit]
+Description=cmsResourceService in a container
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run --privileged --net=host \\
+    -v /home/core/cms.conf:/usr/local/etc/cms.conf \\
+    -v /sys/fs/cgroup:/sys/fs/cgroup \\
+    --rm --name %p.%i lmio/cms:lmio2015 \\
+    sh -c 'ln -sf /usr/share/zoneinfo/Europe/Vilnius /etc/localtime && cmsResourceService -a %i'
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable cms@1.service
+systemctl start cms@1.service || :
+# End cms.service
+
