@@ -1,0 +1,43 @@
+# Begin cws.service
+cat > /etc/systemd/system/cws@.service <<EOF
+[Unit]
+Description=cwsResourceService in a container
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run --net=host \\
+   -v /home/core/cms.conf:/usr/local/etc/cms.conf \\
+   --rm --name %p.%i lmio/cms:lmio2015 \\
+   sh -c 'ln -sf /usr/share/zoneinfo/Europe/Vilnius /etc/localtime && cmsContestWebServer -c %i'
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# if $IP ends with 2/20, it's jau
+# if $IP ends with 3/20, it's jau
+IP=$(ip -4 addr show dev eth0 | awk '/^\s+inet 172/{print $2}'  | cut -f4 -d.)
+echo "End of IP: ${IP}"
+
+if [ "${IP}" = "2/20" ]; then
+    systemctl enable cws@1.service
+    systemctl start cws@1.service || :
+elif [ "${IP}" = "3/20" ] || [ "${IP}" = "5/20" ]; then
+    systemctl enable cws@2.service
+    systemctl start cws@2.service || :
+else
+    printf "Invalid IP: %s\n" "${IP}"
+    exit 1
+fi
+
+# End cws.service
+

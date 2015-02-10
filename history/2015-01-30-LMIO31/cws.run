@@ -1,0 +1,198 @@
+#!/bin/bash
+set -euo pipefail
+cat > /home/core/cms.conf <<EOF
+{
+    "temp_dir": "/tmp",
+    "backdoor": false,
+
+    "_comments": [
+            "172.31.2.1   - management, nginx",
+            "172.31.2.2   - CWS-jau-1a",
+            "172.31.2.3   - CWS-vyr-1a",
+            "172.31.2.4   - Worker-1a",
+            "172.31.2.5   - CWS-vyr-1a2",
+
+            "172.31.17.2  - CWS-jau-1b",
+            "172.31.17.3  - CWS-vyr-1b",
+            "172.31.17.4  - Worker-1b",
+            "172.31.17.5  - CWS-vyr-1b2",
+
+            "172.31.33.2  - CWS-jau-1c",
+            "172.31.33.3  - CWS-vyr-1c",
+            "172.31.33.4  - Worker-1c",
+            "172.31.33.5  - CWS-vyr-1c2"
+    ],
+
+    "core_services":
+    {
+        "LogService":        [["172.31.2.1", 29000]],
+        "ResourceService":   [
+
+            ["172.31.2.1", 28000],
+            ["172.31.2.2", 28000],
+            ["172.31.2.3", 28000],
+            ["172.31.2.4", 28000],
+            ["172.31.2.5", 28000],
+
+            ["172.31.17.2", 28000],
+            ["172.31.17.3", 28000],
+            ["172.31.17.4", 28000],
+            ["172.31.17.5", 28000],
+
+            ["172.31.33.2", 28000],
+            ["172.31.33.3", 28000],
+            ["172.31.33.4", 28000],
+            ["172.31.33.5", 28000]
+
+                ],
+        "ScoringService":    [["172.31.2.1", 28500]],
+        "Checker":           [["172.31.2.1", 22000]],
+        "EvaluationService": [["172.31.2.1", 25000]],
+        "Worker":            [
+
+            ["172.31.2.4", 26000], ["172.31.2.4", 26001], ["172.31.2.4", 26002], ["172.31.2.4", 26003],
+            ["172.31.2.4", 26004], ["172.31.2.4", 26005], ["172.31.2.4", 26006], ["172.31.2.4", 26007],
+            ["172.31.2.4", 26008], ["172.31.2.4", 26009], ["172.31.2.4", 26010], ["172.31.2.4", 26011],
+            ["172.31.2.4", 26012], ["172.31.2.4", 26013], ["172.31.2.4", 26014], ["172.31.2.4", 26015],
+            ["172.31.2.4", 26016], ["172.31.2.4", 26017], ["172.31.2.4", 26018], ["172.31.2.4", 26019],
+            ["172.31.2.4", 26020], ["172.31.2.4", 26021], ["172.31.2.4", 26022], ["172.31.2.4", 26023],
+            ["172.31.2.4", 26024], ["172.31.2.4", 26025], ["172.31.2.4", 26026], ["172.31.2.4", 26027],
+            ["172.31.2.4", 26028], ["172.31.2.4", 26029], ["172.31.2.4", 26030], ["172.31.2.4", 26031],
+            ["172.31.2.4", 26032], ["172.31.2.4", 26033], ["172.31.2.4", 26034], ["172.31.2.4", 26035],
+
+            ["172.31.17.4", 26000], ["172.31.17.4", 26001], ["172.31.17.4", 26002], ["172.31.17.4", 26003],
+            ["172.31.17.4", 26004], ["172.31.17.4", 26005], ["172.31.17.4", 26006], ["172.31.17.4", 26007],
+            ["172.31.17.4", 26008], ["172.31.17.4", 26009], ["172.31.17.4", 26010], ["172.31.17.4", 26011],
+            ["172.31.17.4", 26012], ["172.31.17.4", 26013], ["172.31.17.4", 26014], ["172.31.17.4", 26015],
+            ["172.31.17.4", 26016], ["172.31.17.4", 26017], ["172.31.17.4", 26018], ["172.31.17.4", 26019],
+            ["172.31.17.4", 26020], ["172.31.17.4", 26021], ["172.31.17.4", 26022], ["172.31.17.4", 26023],
+            ["172.31.17.4", 26024], ["172.31.17.4", 26025], ["172.31.17.4", 26026], ["172.31.17.4", 26027],
+            ["172.31.17.4", 26028], ["172.31.17.4", 26029], ["172.31.17.4", 26030], ["172.31.17.4", 26031],
+            ["172.31.17.4", 26032], ["172.31.17.4", 26033], ["172.31.17.4", 26034], ["172.31.17.4", 26035],
+
+            ["172.31.33.4", 26000], ["172.31.33.4", 26001], ["172.31.33.4", 26002], ["172.31.33.4", 26003],
+            ["172.31.33.4", 26004], ["172.31.33.4", 26005], ["172.31.33.4", 26006], ["172.31.33.4", 26007],
+            ["172.31.33.4", 26008], ["172.31.33.4", 26009], ["172.31.33.4", 26010], ["172.31.33.4", 26011],
+            ["172.31.33.4", 26012], ["172.31.33.4", 26013], ["172.31.33.4", 26014], ["172.31.33.4", 26015],
+            ["172.31.33.4", 26016], ["172.31.33.4", 26017], ["172.31.33.4", 26018], ["172.31.33.4", 26019],
+            ["172.31.33.4", 26020], ["172.31.33.4", 26021], ["172.31.33.4", 26022], ["172.31.33.4", 26023],
+            ["172.31.33.4", 26024], ["172.31.33.4", 26025], ["172.31.33.4", 26026], ["172.31.33.4", 26027],
+            ["172.31.33.4", 26028], ["172.31.33.4", 26029], ["172.31.33.4", 26030], ["172.31.33.4", 26031],
+            ["172.31.33.4", 26032], ["172.31.33.4", 26033], ["172.31.33.4", 26034], ["172.31.33.4", 26035]
+
+        ],
+        "ContestWebServer":  [
+
+            ["172.31.2.2",  21000], ["172.31.2.3",  21000], ["172.31.2.5",  21000],
+            ["172.31.17.2", 21000], ["172.31.17.3", 21000], ["172.31.17.5", 21000],
+            ["172.31.33.2", 21000], ["172.31.33.3", 21000], ["172.31.33.5", 21000]
+
+            ],
+        "AdminWebServer":    [["172.31.2.1", 21100]],
+        "ProxyService":      [["172.31.2.1", 28600]],
+        "TeacherWebServer":  [["172.31.2.1", 21200]]
+
+    },
+
+    "other_services": {},
+
+    "database": "postgresql+psycopg2://cmsuser:cmspassword@cmsdb.curzrhl031o4.eu-west-1.rds.amazonaws.com/cmsdb",
+    "database_debug": false,
+    "twophase_commit": false,
+    "keep_sandbox": false,
+    "secret_key":             "827e551fcf202ff9ae8abffd0f154540",
+    "tornado_debug": false,
+    "contest_listen_address": [
+        "", "", "", "", "", "", "", "",
+        "", "", "", "", "", "", "", "",
+
+        "", "", "", "", "", "", "", "",
+        "", "", "", "", "", "", "", "",
+
+        "", "", "", "", "", "", "", "",
+        "", "", "", "", "", "", "", "",
+
+        "", "", "", "", "", "", "", "",
+        "", "", "", "", "", "", "", ""
+    ],
+    "contest_listen_port":    [
+        9000, 9000, 9000, 9000, 9000, 9000, 9000, 9000,
+        9000, 9000, 9000, 9000, 9000, 9000, 9000, 9000
+    ],
+    "cookie_duration": 10800,
+    "submit_local_copy":      true,
+    "submit_local_copy_path": "%s/submissions/",
+    "ip_lock": true,
+    "block_hidden_users": false,
+    "is_proxy_used": true,
+    "max_submission_length": 100000,
+    "max_input_length": 5000000,
+    "stl_path": "/usr/share/doc/stl-manual/html/",
+    "allow_questions": true,
+    "admin_listen_address": "",
+    "admin_listen_port":    8889,
+
+    "teacher_listen_address": "",
+    "teacher_listen_port":    8890,
+    "teacher_active_contests": [1, 2],
+    "teacher_contest_urls": ["http://jau.cms.lmio.lt", "http://vyr.cms.lmio.lt"],
+    "teacher_locale": "lt",
+
+    "rankings": [],
+    "https_certfile": null
+}
+EOF
+# Begin authorized_keys.d
+cat > /home/core/.ssh/authorized_keys.d/ignas <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyHI1SjxNY6D8Mnp1nS5vWRrOtIQBlgOCWfdNpSXmZXq0ZtxoAS8XNlI8m3NekjscqS3K7K+dZUF3QzWNZs/lWUKtKALv+GC+8taFBnfnAcGFB6zc29VzPfq9o1o+6T5Z8pNUCVtiCDUHAefWRdcXpdz7YXY28vJ2W7/smApmr7PNPQzt1EsL7vsNB9xDCSUXR0kiRr/pjmc8mm4nAaZHEdX6RB1fzWCAPIPgmJZwnzbz/hfia8EdQARVdGvvPb3NbYzgF7UHTXRcY89rVd1vJhr+HnG7MO++k4INgn36kP6hHUE75USpYp4aM8E2FwSB71z5B4ejBhqUezOfpvUlv ignas@c3000
+EOF
+cat > /home/core/.ssh/authorized_keys.d/vytisb <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAuWdPx8Vtt3prb+7iLWaWKE7IjHzm0HqkAMETKrMhWdz+Jc5E/DV5kSKhZ8z5ymeMqGe+B69g30QRMKFy6L8AKs4xEV28lE8okc20RzTiLVp2Wj9XvlkBBFB1/JhBu5AlDYV49uxlLVnqZjia/Rd/h0Ux9zPe15dWl8qZM8cljSOrosmjnXNQcwWfmYhuPxgIuKQQNa67NFrioZ9lQaDyv4R4DuY7tSjfW/9gp9EetjBNuPmGp9LGhD3MJ4TBqyAX1eaaqOThzQrjtCcugpPmUNHygaWn0KGzFTZU+0ETgbjtSzvAcCiD+PU29UqeUeDpRg5U1h1otOZmLcH1qdd57w==
+EOF
+cat > /home/core/.ssh/authorized_keys.d/motiejus <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCXQF2yXN72CZguRZjfrXVMiCj+RsSDddSyt+4mr2XlHH8YYAapLtoelI+KMtyJzB9EX2ST1sLcZW3GowEtQxqe/4IsxqEjG6so9/K7vPINi3uBtrZFLz1B3KNcQFZrTGvstAQOBMiW0TALdR58vSfJhnI9Vd4NHi0WF+l2TyW62d7wYQfMk4jHPzXzH4terH4suiqhWmMLksOL/C66tWggFFa0qCoynfuyUnVfUZD+NUtjFmqLLHltcB2uD+F76SdAaii/oumnhpE0CZz92SyqirzxJcHL5szWsCDvtNuvQlAHaQzy0bIAhnEIuViywVKeXav2Shfn7T3Jgy4xdisB
+EOF
+# end authorized_keys.d
+# Begin cws.service
+cat > /etc/systemd/system/cws@.service <<EOF
+[Unit]
+Description=cwsResourceService in a container
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
+ExecStart=/opt/bin/systemd-docker run --net=host \\
+   -v /home/core/cms.conf:/usr/local/etc/cms.conf \\
+   --rm --name %p.%i lmio/cms:lmio2015 \\
+   sh -c 'ln -sf /usr/share/zoneinfo/Europe/Vilnius /etc/localtime && cmsContestWebServer -c %i'
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=600
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# if $IP ends with 2/20, it's jau
+# if $IP ends with 3/20, it's jau
+IP=$(ip -4 addr show dev eth0 | awk '/^\s+inet 172/{print $2}'  | cut -f4 -d.)
+echo "End of IP: ${IP}"
+
+if [ "${IP}" = "2/20" ]; then
+    systemctl enable cws@1.service
+    systemctl start cws@1.service || :
+elif [ "${IP}" = "3/20" ] || [ "${IP}" = "5/20" ]; then
+    systemctl enable cws@2.service
+    systemctl start cws@2.service || :
+else
+    printf "Invalid IP: %s\n" "${IP}"
+    exit 1
+fi
+
+# End cws.service
+
