@@ -1,5 +1,3 @@
-#!/bin/bash
-set -euo pipefail
 # Begin authorized_keys.d
 cat > /home/core/.ssh/authorized_keys.d/ignas <<EOF
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyHI1SjxNY6D8Mnp1nS5vWRrOtIQBlgOCWfdNpSXmZXq0ZtxoAS8XNlI8m3NekjscqS3K7K+dZUF3QzWNZs/lWUKtKALv+GC+8taFBnfnAcGFB6zc29VzPfq9o1o+6T5Z8pNUCVtiCDUHAefWRdcXpdz7YXY28vJ2W7/smApmr7PNPQzt1EsL7vsNB9xDCSUXR0kiRr/pjmc8mm4nAaZHEdX6RB1fzWCAPIPgmJZwnzbz/hfia8EdQARVdGvvPb3NbYzgF7UHTXRcY89rVd1vJhr+HnG7MO++k4INgn36kP6hHUE75USpYp4aM8E2FwSB71z5B4ejBhqUezOfpvUlv ignas@c3000
