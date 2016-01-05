@@ -1,16 +1,20 @@
 GIT_CMS ?= git://github.com/lmio/cms.git -b lmio2015 --recursive
 
-.PHONY: deb all
+# Change these before running 'make', or run make as follows:
+#
+# make ADMINPW=grok1 DBPASSWD=grok2
+ADMINPW ?= default
+DBPASSWD ?= default
 
-all: deb
+BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
-DEB = 
+.PHONY: all
+
+all: build/cms_aws.deb
 
 cms:
 	git clone $(GIT_CMS)
 
-deb: build/cms.deb
-
-build/cms.deb: cms Dockerfile
-	docker build -t cms_builder .
+build/cms_aws.deb: cms Dockerfile
+	docker build $(BUILD_VARS) -t cms_builder .
 	docker run --rm -v $(CURDIR)/build:/build cms_builder
