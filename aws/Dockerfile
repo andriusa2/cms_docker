@@ -4,6 +4,11 @@ RUN apt-get update
 RUN apt-get -y install gettext python2.7 python-setuptools \
                        checkinstall apache2-utils git
 
+# We can reuse this image for aminating too
+RUN apt-get -y install python-dev python-yaml
+RUN easy_install \
+        git+https://github.com/Netflix/aminator.git@2.1.77-dev#egg=aminator
+
 ADD cms /cms/
 WORKDIR /cms/
 
@@ -34,12 +39,8 @@ RUN htpasswd -bc unpacked_deb/etc/nginx/htpasswd lioadmin ${ADMINPW}
 
 ARG DBPASSWD
 ENV DBPASSWD $DBPASSWD
-RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms.conf
+RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf
 
 RUN dpkg-deb -b unpacked_deb cms_aws.deb
-
-# We can reuse this image for aminating the deb
-RUN easy_install \
-        git+https://github.com/Netflix/aminator.git@2.1.77-dev#egg=aminator
 
 CMD cp cms_aws.deb /build/cms_aws.deb
