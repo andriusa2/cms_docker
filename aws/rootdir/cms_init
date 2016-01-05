@@ -19,15 +19,9 @@ _hyperthreading() {
     sed -i "s/numprocs=.*/numprocs=$(nproc)/" /etc/supervisor/conf.d/worker.conf
 }
 
-_worker_cms_conf() {
-    sed -i -e 's/worker4.cms1/127.0.0.1/g' \
-           -e '/worker.\.cms1/d' /usr/local/etc/cms.conf
-}
-
 case "$1" in
     worker)
         _hyperthreading
-        _worker_cms_conf
         ;; 
     cms)
         :

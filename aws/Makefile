@@ -8,6 +8,9 @@ DBPASSWD ?= default
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
+MAIN_CONF = rootdir/usr/local/etc/cms_main.conf
+WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
+
 .PHONY: all
 
 all: build/cms_aws.deb
@@ -15,7 +18,11 @@ all: build/cms_aws.deb
 cms:
 	git clone $(GIT_CMS)
 
-build/cms_aws.deb: cms Dockerfile
+$(WORKER_CONF): $(MAIN_CONF)
+	sed -e 's/worker4.cms1/127.0.0.1/g' \
+		-e '/worker.\.cms1/d' $< > $@
+
+build/cms_aws.deb: $(WORKER_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_builder .
 	docker run --rm -v $(CURDIR)/build:/build cms_builder
 
