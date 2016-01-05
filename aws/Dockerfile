@@ -40,6 +40,7 @@ RUN htpasswd -bc unpacked_deb/etc/nginx/htpasswd lioadmin ${ADMINPW}
 ARG DBPASSWD
 ENV DBPASSWD $DBPASSWD
 RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf
+RUN rm unpacked_deb/usr/local/etc/cms.conf
 
 RUN dpkg-deb -b unpacked_deb cms_aws.deb
 
