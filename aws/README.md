@@ -27,9 +27,10 @@ Getting started
 
 Requirements:
 
-1. Machine with Docker 1.9+ installed for building the deb file.
-2. EC2 machine with aminator for creating the AMI
-   ([aminator](https://github.com/Netflix/aminator) wors only in EC2).
+1. Machine with Docker 1.9+ for building the deb file. If in EC2, you don't
+   need the second one.
+2. EC2 machine with [aminator](https://github.com/Netflix/aminator) for
+   creating the AMI.
 
 Creating the deb image
 ----------------------
@@ -42,6 +43,8 @@ The image will be in `build/cms_aws.deb`.
 
 Creating the AMI
 ----------------
+
+TBD. Will be:
 
 ```
 make ami
