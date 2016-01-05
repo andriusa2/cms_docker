@@ -18,3 +18,6 @@ cms:
 build/cms_aws.deb: cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_builder .
 	docker run --rm -v $(CURDIR)/build:/build cms_builder
+
+ami:
+	:
