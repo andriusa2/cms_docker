@@ -15,11 +15,13 @@ branch](https://github.com/lmio/cms/tree/lmio2015) for the code changes.
 We assume the following setup in AWS:
 
 1. **worker** node running cmsWorkers only. Runs on c4.xlarge or larger
-   (otherwise it's impossible to turn off hyperthreading).
+   (otherwise it's impossible to turn off hyperthreading). Uses
+`/usr/local/etc/cms_worker.conf`.
 2. **cws** node running two CWS instances on ports 9000 (contest id=1) and 9001
-   (contest id=2).
+   (contest id=2). Uses `/usr/local/etc/cms_main.conf`.
 3. **centriukas** running everything else. It also runs nginx on port 80 http
-   basic-auth. Hostname: `centriukas.cms1`.
+   basic-auth. Hostname: `centriukas.cms1`. Uses
+`/usr/local/etc/cms_main.conf`.
 4. **Database**. User: `cmsdb`. Hostname: `cmsdb.cms1`.
 
 Getting started
