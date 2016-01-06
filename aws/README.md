@@ -85,20 +85,11 @@ EC2 machine policy
 
 3. When creating the EC2 instance, select the newly created role.
 
-Creating the deb image
-----------------------
+Creating the deb image, creating the AMI
+----------------------------------------
 
-```
-make deb ADMINPW=admin_passwd DBPASSWD=db_passwd
-```
+For help how to create a Deb image and an AMI, run:
 
-The image will be in `build/cms_aws.deb`.
-
-Creating the AMI
-----------------
-
-TBD. Will be:
-
-```
-make ami
+```bash
+make help
 ```
