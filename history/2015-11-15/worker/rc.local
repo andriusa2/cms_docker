@@ -1,0 +1,3 @@
+sed -i "s/numprocs=.*/numprocs=$(nproc)/" /etc/supervisor/conf.d/worker.conf
+
+supervisorctl reload || :
