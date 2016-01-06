@@ -15,7 +15,7 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 
 metadata = curl -s http://169.254.169.254/latest/meta-data
 az = $(shell $(metadata)/placement/availability-zone | head -c -1)
-ami = $(shell curl -s $(metadata)/ami-id)
+ami = $(shell $(metadata)/ami-id)
 
 DEBFILE = build/cms_aws-1_amd64.deb
 
