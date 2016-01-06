@@ -13,6 +13,7 @@ BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
 MAIN_CONF = rootdir/usr/local/etc/cms_main.conf
 WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
+CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
 
 .PHONY: all deb help
@@ -32,7 +33,10 @@ $(WORKER_CONF): $(MAIN_CONF)
 	sed -e 's/worker4.lmio/0.0.0.0/g' \
 		-e '/worker.\.lmio/d' $< > $@
 
-$(DEBFILE): $(WORKER_CONF) cms Dockerfile
+$(CENTRIUKAS_CONF): $(MAIN_CONF)
+	sed 's/centriukas.lmio/0.0.0.0/g' $< > $@
+
+$(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_aws .
 	docker run --rm -v $(CURDIR)/build:/build cms_aws
 

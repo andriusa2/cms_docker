@@ -1,3 +1,4 @@
 build/*.deb
 cms
 rootdir/usr/local/etc/cms_worker.conf
+rootdir/usr/local/etc/cms_centriukas.conf

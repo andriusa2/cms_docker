@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Designed to be called on startup (e.g. from cloud-init) depending on the function
 # like this:
-# /cms_init cms
+# /cms_init centriukas
 # /cms_init cws
 # /cms_init worker
 
@@ -23,8 +23,12 @@ case "$1" in
     worker)
         _hyperthreading
         ;; 
-    cms)
+    centriukas)
         :
+        ;;
+    *)
+        :
+        ;;
 esac
 
 sed -i 's/autostart=false/autostart=true/' /etc/supervisor/conf.d/${1}.conf
