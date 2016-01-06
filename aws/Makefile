@@ -5,9 +5,9 @@ GIT_CMS ?= git://github.com/lmio/cms.git -b lmio2015 --recursive
 ADMINPW ?= default
 DBPASSWD ?= default
 
-metadata = curl -s http://169.254.169.254/latest/meta-data
-AMI_ID ?= $(shell $(metadata)/ami-id)
-REGION ?= $(shell $(metadata)/placement/availability-zone | head -c -1)
+metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
+AMI_ID ?= $(shell $(metadata)/ami-id || echo ami-...)
+REGION ?= $(shell $(metadata)/placement/availability-zone || echo us-east-1)
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
@@ -23,7 +23,7 @@ deb: $(DEBFILE)
 help:
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
-	@echo "    make ami [AMI_ID=ami-...] [REGION=us-east-1]"
+	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)]"
 
 cms:
 	git clone $(GIT_CMS)
