@@ -46,6 +46,45 @@ apt-get update
 apt-get install docker-engine
 ```
 
+EC2 machine policy
+------------------
+
+1. Create a new policy:
+
+```javascript
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt0123456789012",
+      "Action": [
+        "ec2:AttachVolume",
+        "ec2:CopySnapshot",
+        "ec2:CreateSnapshot",
+        "ec2:CreateTags",
+        "ec2:CreateVolume",
+        "ec2:DeleteSnapshot",
+        "ec2:DeleteTags",
+        "ec2:DeleteVolume",
+        "ec2:DeregisterImage",
+        "ec2:DetachVolume",
+        "ec2:RegisterImage",
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+```
+
+2. Create a new role for *Amazon EC2*: *Allows EC2 instances to call AWS
+   services on your behalf.*
+
+3. When creating the EC2 instance, select the newly created role.
+
 Creating the deb image
 ----------------------
 
