@@ -6,8 +6,8 @@ ADMINPW ?= default
 DBPASSWD ?= default
 
 metadata = curl -s http://169.254.169.254/latest/meta-data
-AZ ?= $(shell $(metadata)/placement/availability-zone | head -c -1)
 AMI_ID ?= $(shell $(metadata)/ami-id)
+REGION ?= $(shell $(metadata)/placement/availability-zone | head -c -1)
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
@@ -23,7 +23,7 @@ deb: $(DEBFILE)
 help:
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
-	@echo "    make ami [AZ=us-east-1] [AMI_ID=ami-...]"
+	@echo "    make ami [AMI_ID=ami-...] [REGION=us-east-1]"
 
 cms:
 	git clone $(GIT_CMS)
@@ -42,7 +42,7 @@ ami: $(DEBFILE)
 		-v $(CURDIR)/build:/build cms_aws \
 		aminate -e ec2_aptitude_linux \
 			-B $(AMI_ID) \
-			-r $(AZ) \
+			-r $(REGION) \
 			--partition 1 \
 			--vm-type hvm \
 			file:///$<
