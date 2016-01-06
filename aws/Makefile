@@ -11,10 +11,13 @@ BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 MAIN_CONF = rootdir/usr/local/etc/cms_main.conf
 WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 
-.PHONY: all
+.PHONY: all deb help
 
 all: deb
 deb: build/cms_aws.deb
+
+help:
+	@echo Usage: make deb ADMINPW=grok1 DBPASSWD=grok2
 
 cms:
 	git clone $(GIT_CMS)
