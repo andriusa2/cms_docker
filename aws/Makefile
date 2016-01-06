@@ -33,15 +33,14 @@ $(WORKER_CONF): $(MAIN_CONF)
 		-e '/worker.\.cms1/d' $< > $@
 
 $(DEBFILE): $(WORKER_CONF) cms Dockerfile
-	docker build $(BUILD_VARS) -t cms_builder .
-	docker run --rm -v $(CURDIR)/build:/build cms_builder
+	docker build $(BUILD_VARS) -t cms_aws .
+	docker run --rm -v $(CURDIR)/build:/build cms_aws
 
 ami: $(DEBFILE)
-	docker run --rm --privileged \
-		-v /dev:/dev -v $(CURDIR)/build:/build cms_builder \
-			aminate -e ec2_aptitude_linux \
-				-B $(ami) \
-				-r $(az) \
-				--partition 1 \
-				--vm-type hvm \
-				file:///$<
+	docker run --rm --privileged -v $(CURDIR)/build:/build cms_aws \
+		aminate -e ec2_aptitude_linux \
+			-B $(ami) \
+			-r $(az) \
+			--partition 1 \
+			--vm-type hvm \
+			file:///$<
