@@ -7,7 +7,8 @@ DBPASSWD ?= default
 
 metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
 AMI_ID ?= $(shell $(metadata)/ami-id || echo ami-...)
-REGION ?= $(shell $(metadata)/placement/availability-zone || echo us-east-1)
+REGION ?= $(shell $(metadata)/placement/availability-zone | \
+		head -c -1 || echo us-east-1)
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
