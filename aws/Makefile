@@ -37,7 +37,9 @@ $(DEBFILE): $(WORKER_CONF) cms Dockerfile
 	docker run --rm -v $(CURDIR)/build:/build cms_aws
 
 ami: $(DEBFILE)
-	docker run --rm --privileged -v $(CURDIR)/build:/build cms_aws \
+	docker run --rm --privileged \
+		-v /dev:/dev \
+		-v $(CURDIR)/build:/build cms_aws \
 		aminate -e ec2_aptitude_linux \
 			-B $(ami) \
 			-r $(az) \
