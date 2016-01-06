@@ -35,10 +35,11 @@ build/cms_aws.deb: $(WORKER_CONF) cms Dockerfile
 	docker run --rm -v $(CURDIR)/build:/build cms_builder
 
 ami: build/cms_aws.deb
-	docker run --privileged -v /dev:/dev --rm -v build:/build cms_builder \
-		aminate -e ec2_aptitude_linux \
-			-B $(ami) \
-			-r $(az) \
-			--partition 1 \
-			--vm-type hvm \
-			file://$(CURDIR)/$<
+	docker run --rm --privileged \
+		-v /dev:/dev -v $(CURDIR)/build:/build cms_builder \
+			aminate -e ec2_aptitude_linux \
+				-B $(ami) \
+				-r $(az) \
+				--partition 1 \
+				--vm-type hvm \
+				file:///$<
