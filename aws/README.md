@@ -93,3 +93,20 @@ For help how to create a Deb image and an AMI, run:
 ```bash
 make help
 ```
+
+Node discovery
+--------------
+
+CMS nodes depend on CMS for discovering others. In particular, this is what they're looking for:
+
+1. **ALL** need to know **DB**.
+2. **Centriukas**: **Worker**.
+3. **Worker**: **Centriukas**.
+4. **CWS**: *Maybe centriukas*.
+
+Discovery is done via Route53. Check `rootdir/usr/local/etc/cms_*.conf` for the
+expected endpoint names.
+
+Every service will live in its own Auto Scaling Group, and there will be some
+kind of background process which will monitor the members of the auto-scaling
+group and put their internal IPs to internal-Route53.
