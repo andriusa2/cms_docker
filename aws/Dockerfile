@@ -42,6 +42,6 @@ ENV DBPASSWD $DBPASSWD
 RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf
 RUN rm unpacked_deb/usr/local/etc/cms.conf
 
-RUN dpkg-deb -b unpacked_deb cms_aws.deb
+RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 
-CMD cp cms_aws.deb /build/cms_aws.deb
+CMD cp cms_aws-1_amd64.deb /build/cms_aws-1_amd64.deb
