@@ -3,6 +3,9 @@ GIT_CMS ?= git://github.com/lmio/cms.git -b lmio2015 --recursive
 # Change these before running 'make', or run make as follows:
 #
 # make ADMINPW=grok1 DBPASSWD=grok2
+#
+# Since exposing these secrets has very minimal impact on running the Olympiad,
+# I opted for simplicity over security here.
 ADMINPW ?= default
 DBPASSWD ?= default
 
