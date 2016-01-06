@@ -13,6 +13,10 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 
 .PHONY: all deb help
 
+metadata = curl -s http://169.254.169.254/latest/meta-data
+az = $(shell $(metadata)/placement/availability-zone | head -c -1)
+ami = $(shell curl -s $(metadata)/ami-id)
+
 all: deb
 deb: build/cms_aws.deb
 
@@ -30,5 +34,11 @@ build/cms_aws.deb: $(WORKER_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_builder .
 	docker run --rm -v $(CURDIR)/build:/build cms_builder
 
-ami:
-	:
+ami: build/cms_aws.deb
+	docker run --privileged -v /dev:/dev --rm -v build:/build cms_builder \
+		aminate -e ec2_aptitude_linux \
+			-B $(ami) \
+			-r $(az) \
+			--partition 1 \
+			--vm-type hvm \
+			file://$(CURDIR)/$<
