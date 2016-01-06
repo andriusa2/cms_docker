@@ -29,8 +29,8 @@ cms:
 	git clone $(GIT_CMS)
 
 $(WORKER_CONF): $(MAIN_CONF)
-	sed -e 's/worker4.cms1/0.0.0.0/g' \
-		-e '/worker.\.cms1/d' $< > $@
+	sed -e 's/worker4.lmio/0.0.0.0/g' \
+		-e '/worker.\.lmio/d' $< > $@
 
 $(DEBFILE): $(WORKER_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_aws .

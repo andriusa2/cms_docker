@@ -20,9 +20,9 @@ We assume the following setup in AWS:
 2. **cws** node running two CWS instances on ports 9000 (contest id=1) and 9001
    (contest id=2). Uses `/usr/local/etc/cms_main.conf`.
 3. **centriukas** running everything else. It also runs nginx on port 80 http
-   basic-auth. Hostname: `centriukas.cms1`. Uses
+   basic-auth. Hostname: `centriukas.lmio`. Uses
 `/usr/local/etc/cms_main.conf`.
-4. **Database**. User: `cmsdb`. Hostname: `cmsdb.cms1`.
+4. **Database**. User: `cmsdb`. Hostname: `cmsdb.lmio`.
 
 Getting started
 ---------------
