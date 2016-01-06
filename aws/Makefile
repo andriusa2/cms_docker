@@ -13,7 +13,8 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 
 .PHONY: all
 
-all: build/cms_aws.deb
+all: deb
+deb: build/cms_aws.deb
 
 cms:
 	git clone $(GIT_CMS)

@@ -42,8 +42,8 @@ sudo apt-key adv \
     --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo 'deb http://apt.dockerproject.org/repo ubuntu-trusty main' | \
     sudo tee /etc/apt/sources.list.d/docker.list
-apt-get update
-apt-get install docker-engine
+sudo apt-get update
+sudo apt-get install docker-engine
 ```
 
 EC2 machine policy
