@@ -110,17 +110,3 @@ expected endpoint names.
 Every service will live in its own Auto Scaling Group, and there will be some
 kind of background process which will monitor the members of the auto-scaling
 group and put their internal IPs to internal-Route53.
-
-Latest Ubuntu AMI
------------------
-
-```bash
-aws ec2 describe-images \
-    --region eu-central-1 \
-    --owners 099720109477 \
-    --filters \
-        Name=root-device-type,Values=ebs \
-        Name=architecture,Values=x86_64 \
-        Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
-    grep \"Name\": | sort | tail -1 | awk -F'"' '{ print $4 }'
-```

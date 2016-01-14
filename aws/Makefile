@@ -17,7 +17,7 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
 
-.PHONY: all deb help
+.PHONY: all deb help get-ami-name
 
 all: deb
 deb: $(DEBFILE)
@@ -26,6 +26,7 @@ help:
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
 	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)]"
+	@echo "    make get-ami-name  gets latest ami id of ubuntu 14.04 hvm"
 
 cms:
 	git clone $(GIT_CMS)
@@ -51,3 +52,13 @@ ami: $(DEBFILE)
 			--partition 1 \
 			--vm-type hvm \
 			file:///$<
+
+get-ami-name:
+	@aws ec2 describe-images \
+	    --region eu-central-1 \
+	    --owners 099720109477 \
+	    --filters \
+		Name=root-device-type,Values=ebs \
+		Name=architecture,Values=x86_64 \
+		Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
+	    grep \"Name\": | sort | tail -1 | awk -F'"' '{ print $$4 }'
