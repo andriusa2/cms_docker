@@ -9,6 +9,7 @@ metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
 AMI_ID ?= $(shell $(metadata)/ami-id || echo ami-...)
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
 		head -c -1 || echo us-east-1)
+SECRET_KEY ?= $(shell $(metadata)/hostname | md5sum | awk '{print $$1}')
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
@@ -32,11 +33,16 @@ cms:
 	git clone $(GIT_CMS)
 
 $(WORKER_CONF): $(MAIN_CONF)
-	sed -e 's/worker4.lmio/0.0.0.0/g' \
+	echo $(SECRET_KEY)
+	sed  \
+		-e 's/worker4.lmio/0.0.0.0/g' \
+		-e 's/SECRET_KEY/$(SECRET_KEY)/' \
 		-e '/worker.\.lmio/d' $< > $@
 
 $(CENTRIUKAS_CONF): $(MAIN_CONF)
-	sed 's/centriukas.lmio/0.0.0.0/g' $< > $@
+	sed \
+		-e 's/SECRET_KEY/$(SECRET_KEY)/' \
+		-e 's/centriukas.lmio/0.0.0.0/g' $< > $@
 
 $(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_aws .
