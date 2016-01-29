@@ -9,10 +9,11 @@ metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
 AMI_ID ?= $(shell $(metadata)/ami-id || echo ami-...)
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
 		head -c -1 || echo us-east-1)
-SECRET_KEY ?= $(shell $(metadata)/hostname | md5sum | awk '{print $$1}')
+SECRET_KEY ?= $(shell $(metadata)/instance-id | md5sum | awk '{print $$1}')
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
+MAIN_TPL = cms.conf.tpl
 MAIN_CONF = rootdir/usr/local/etc/cms_main.conf
 WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
@@ -26,22 +27,23 @@ deb: $(DEBFILE)
 help:
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
-	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)]"
+	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)] [SECRET_KEY=$(SECRET_KEY)]"
 	@echo "    make get-ami-name  gets latest ami id of ubuntu 14.04 hvm"
 
 cms:
 	git clone $(GIT_CMS)
 
+$(MAIN_CONF): $(MAIN_TPL)
+	sed \
+		-e 's/SECRET_KEY/$(SECRET_KEY)/' $< > $@
+
 $(WORKER_CONF): $(MAIN_CONF)
-	echo $(SECRET_KEY)
 	sed  \
 		-e 's/worker4.lmio/0.0.0.0/g' \
-		-e 's/SECRET_KEY/$(SECRET_KEY)/' \
 		-e '/worker.\.lmio/d' $< > $@
 
 $(CENTRIUKAS_CONF): $(MAIN_CONF)
 	sed \
-		-e 's/SECRET_KEY/$(SECRET_KEY)/' \
 		-e 's/centriukas.lmio/0.0.0.0/g' $< > $@
 
 $(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
