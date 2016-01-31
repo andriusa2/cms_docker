@@ -18,7 +18,7 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
 
-.PHONY: all deb help
+.PHONY: ami deb help
 
 -include config.mk
 
