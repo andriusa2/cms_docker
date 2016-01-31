@@ -44,8 +44,12 @@ RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf && \
     rm unpacked_deb/usr/local/etc/cms.conf
 RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     mkdir -p  unpacked_deb/var/local/log/cms   && \
+    mkdir -p  unpacked_deb/var/local/lib/cms   && \
     chmod 777 unpacked_deb/var/local/cache/cms && \
-    chmod 777 unpacked_deb/var/local/log/cms
+    chmod 777 unpacked_deb/var/local/log/cms   && \
+    chmod 777 unpacked_deb/var/local/lib/cms
+
+RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 
