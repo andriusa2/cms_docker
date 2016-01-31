@@ -1,7 +1,7 @@
 GIT_CMS ?= git://github.com/lmio/cms.git -b lmio2015 --recursive
 
 # Since exposing these secrets has very minimal impact on running the Olympiad,
-# I opted for simplicity over security here.
+# I opted for simplicity over security here. Keep it >8 characters.
 ADMINPW ?= default1
 DBPASSWD ?= default1
 
