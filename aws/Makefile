@@ -63,12 +63,12 @@ ami: config.mk $(DEBFILE)
 
 config.mk:
 	aws ec2 describe-images \
-	    --output text \
-	    --region eu-central-1 \
-	    --owners 099720109477 \
-	    --filters \
-		Name=root-device-type,Values=ebs \
-		Name=architecture,Values=x86_64 \
-		Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
-	grep ^IMAGES | sort -k6,6 | \
-	awk 'END { print "AMI_ID="$$5; print "AMI_NAME="$$6}' > $@
+			--output text \
+			--region eu-central-1 \
+			--owners 099720109477 \
+			--filters \
+			Name=root-device-type,Values=ebs \
+			Name=architecture,Values=x86_64 \
+			Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
+		grep ^IMAGES | sort -k6,6 | \
+		awk 'END { print "AMI_ID="$$5; print "AMI_NAME="$$6}' > $@
