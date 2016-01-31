@@ -2,8 +2,8 @@ GIT_CMS ?= git://github.com/lmio/cms.git -b lmio2015 --recursive
 
 # Since exposing these secrets has very minimal impact on running the Olympiad,
 # I opted for simplicity over security here.
-ADMINPW ?= default
-DBPASSWD ?= default
+ADMINPW ?= default1
+DBPASSWD ?= default1
 
 metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
