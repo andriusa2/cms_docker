@@ -6,7 +6,6 @@ ADMINPW ?= default
 DBPASSWD ?= default
 
 metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
-AMI_ID ?= $(shell $(metadata)/ami-id || echo ami-...)
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
 		head -c -1 || echo us-east-1)
 SECRET_KEY ?= $(shell $(metadata)/instance-id | md5sum | awk '{print $$1}')
@@ -19,21 +18,22 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
 
-.PHONY: all deb help get-ami-name
+.PHONY: all deb help
 
-all: deb
-deb: $(DEBFILE)
+-include config.mk
 
 help:
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
 	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)] [SECRET_KEY=$(SECRET_KEY)]"
-	@echo "    make get-ami-name  gets latest ami id of ubuntu 14.04 hvm"
+
+deb: $(DEBFILE)
 
 cms:
 	git clone $(GIT_CMS)
 
 $(MAIN_CONF): $(MAIN_TPL)
+	mkdir -p rootdir/usr/local/etc
 	sed \
 		-e 's/SECRET_KEY/$(SECRET_KEY)/' $< > $@
 
@@ -50,7 +50,7 @@ $(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_aws .
 	docker run --rm -v $(CURDIR)/build:/build cms_aws
 
-ami: $(DEBFILE)
+ami: config.mk $(DEBFILE)
 	docker run --rm --privileged \
 		-v /dev:/dev \
 		-v $(CURDIR)/build:/build cms_aws \
@@ -59,14 +59,16 @@ ami: $(DEBFILE)
 			-r $(REGION) \
 			--partition 1 \
 			--vm-type hvm \
-			file:///$<
+			file:///$(DEBFILE)
 
-get-ami-name:
-	@aws ec2 describe-images \
+config.mk:
+	aws ec2 describe-images \
+	    --output text \
 	    --region eu-central-1 \
 	    --owners 099720109477 \
 	    --filters \
 		Name=root-device-type,Values=ebs \
 		Name=architecture,Values=x86_64 \
 		Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
-	    grep \"Name\": | sort | tail -1 | awk -F'"' '{ print $$4 }'
+	grep ^IMAGES | sort -k6,6 | \
+	awk 'END { print "AMI_ID="$$5; print "AMI_NAME="$$6}' > $@
