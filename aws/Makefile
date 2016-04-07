@@ -39,7 +39,7 @@ $(MAIN_CONF): $(MAIN_TPL)
 
 $(WORKER_CONF): $(MAIN_CONF)
 	sed  \
-		-e 's/worker4.lmio/0.0.0.0/g' \
+		-e 's/worker6.lmio/0.0.0.0/g' \
 		-e '/worker.\.lmio/d' $< > $@
 
 $(CENTRIUKAS_CONF): $(MAIN_CONF)
