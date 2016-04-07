@@ -22,7 +22,7 @@ DEBFILE = build/cms_aws-1_amd64.deb
 
 -include config.mk
 
-help:
+help: config.mk
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
 	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)] [SECRET_KEY=$(SECRET_KEY)]"
