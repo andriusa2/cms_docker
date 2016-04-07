@@ -34,7 +34,7 @@ Requirements:
 2. EC2 machine with [aminator](https://github.com/Netflix/aminator) for
    creating the AMI.
 
-Installing recent Docker on Ubuntu 14.04:
+Preparing a fresh throwaway Ubuntu 14.04:
 
 ```bash
 #!/bin/bash -e
@@ -44,7 +44,8 @@ sudo apt-key adv \
 echo 'deb http://apt.dockerproject.org/repo ubuntu-trusty main' | \
     sudo tee /etc/apt/sources.list.d/docker.list
 sudo apt-get update
-sudo apt-get install docker-engine -y
+sudo apt-get install -y docker-engine python-pip make
+sudo pip install awscli
 sudo usermod -aG docker ubuntu
 ```
 
