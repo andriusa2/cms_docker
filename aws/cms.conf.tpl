@@ -61,7 +61,7 @@
     "keep_sandbox": false,
     "secret_key":             "SECRET_KEY",
     "tornado_debug": false,
-    "contest_listen_address": [ "", "" ],
+    "contest_listen_address": [ "", "", "" ],
     "contest_listen_port":    [ 9000, 9001, 9002 ],
     "cookie_duration": 10800,
     "submit_local_copy":      true,
