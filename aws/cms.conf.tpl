@@ -29,12 +29,22 @@
             ["worker4.lmio", 26000], ["worker4.lmio", 26001],
             ["worker4.lmio", 26002], ["worker4.lmio", 26003],
             ["worker4.lmio", 26004], ["worker4.lmio", 26005],
-            ["worker4.lmio", 26006], ["worker4.lmio", 26007]
+            ["worker4.lmio", 26006], ["worker4.lmio", 26007],
+
+            ["worker5.lmio", 26000], ["worker5.lmio", 26001],
+            ["worker5.lmio", 26002], ["worker5.lmio", 26003],
+            ["worker5.lmio", 26004], ["worker5.lmio", 26005],
+            ["worker5.lmio", 26006], ["worker5.lmio", 26007],
+
+            ["worker6.lmio", 26000], ["worker6.lmio", 26001],
+            ["worker6.lmio", 26002], ["worker6.lmio", 26003],
+            ["worker6.lmio", 26004], ["worker6.lmio", 26005],
+            ["worker6.lmio", 26006], ["worker6.lmio", 26007]
 
         ],
         "ContestWebServer":  [
 
-            ["127.0.0.1",  21000], ["127.0.0.1",  21001]
+            ["127.0.0.1", 21000], ["127.0.0.1",  21001], ["127.0.0.1", 21002]
 
             ],
         "AdminWebServer":    [["centriukas.lmio", 21100]],
@@ -52,7 +62,7 @@
     "secret_key":             "SECRET_KEY",
     "tornado_debug": false,
     "contest_listen_address": [ "", "" ],
-    "contest_listen_port":    [ 9000, 9001 ],
+    "contest_listen_port":    [ 9000, 9001, 9002 ],
     "cookie_duration": 10800,
     "submit_local_copy":      true,
     "submit_local_copy_path": "%s/submissions/",

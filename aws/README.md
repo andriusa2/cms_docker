@@ -17,11 +17,11 @@ We assume the following setup in AWS:
 1. **worker** node running cmsWorkers only. Runs on c4.xlarge or larger
    (otherwise it's impossible to turn off hyperthreading). Uses
 `/usr/local/etc/cms_worker.conf`.
-2. **cws** node running two CWS instances on ports 9000 (contest id=1) and 9001
-   (contest id=2). Uses `/usr/local/etc/cms_main.conf`.
+2. **cws** node running 3 CWS instances on ports 9000 (contest id=1), 9001
+   (contest id=2) and 9002 (contest id=3). Uses `/usr/local/etc/cms_main.conf`.
 3. **centriukas** running everything else. It also runs nginx on port 80 http
    basic-auth. Hostname: `centriukas.lmio`. Uses
-`/usr/local/etc/cms_main.conf`.
+`/usr/local/etc/cms_main.conf`. Also runs CWS as a backup.
 4. **Database**. User: `cmsdb`. Hostname: `cmsdb.lmio`.
 
 Getting started

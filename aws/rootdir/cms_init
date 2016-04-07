@@ -19,17 +19,22 @@ _hyperthreading() {
     sed -i "s/numprocs=.*/numprocs=$(nproc)/" /etc/supervisor/conf.d/worker.conf
 }
 
+_enable() {
+    sed -i 's/autostart=false/autostart=true/' /etc/supervisor/conf.d/${1}.conf
+}
+
 case "$1" in
     worker)
         _hyperthreading
+        _enable worker
         ;; 
     centriukas)
-        :
+        _enable centriukas
+        _enable cws
         ;;
-    *)
-        :
+    cws)
+        _enable cws
         ;;
 esac
 
-sed -i 's/autostart=false/autostart=true/' /etc/supervisor/conf.d/${1}.conf
 supervisorctl reload || :
