@@ -64,7 +64,7 @@ ami: config.mk $(DEBFILE)
 config.mk:
 	aws ec2 describe-images \
 			--output text \
-			--region eu-central-1 \
+			--region $(REGION) \
 			--owners 099720109477 \
 			--filters \
 			Name=root-device-type,Values=ebs \
