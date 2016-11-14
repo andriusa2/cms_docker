@@ -86,6 +86,7 @@
     "teacher_active_contests": [1, 2],
     "teacher_contest_urls": ["http://jau.cms.lmio.lt", "http://vyr.cms.lmio.lt"],
     "teacher_locale": "lt",
+    "teacher_login_kind": "school",
 
     "rankings": [],
     "https_certfile": null
