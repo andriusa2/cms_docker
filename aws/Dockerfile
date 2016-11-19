@@ -24,7 +24,7 @@ python-netifaces,python-crypto,python-tz,python-six,iso-codes,\
 shared-mime-info,stl-manual,python-beautifulsoup,python-mechanize,\
 python-coverage,python-mock,cgroup-lite,python-requests,\
 python-werkzeug,python-gevent,python-yaml,python-sphinx,supervisor,\
-nginx,patool,htop,ntp \
+nginx,patool,htop,ntp,pv,awscli \
        ./setup.py install
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
