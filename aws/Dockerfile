@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 RUN apt-get update
 RUN apt-get -y install gettext python2.7 python-setuptools \
