@@ -7,7 +7,7 @@ RUN apt-get -y install gettext python2.7 python-setuptools \
 # We can reuse this image for aminating too
 RUN apt-get -y install python-dev python-yaml
 RUN easy_install \
-        git+https://github.com/Netflix/aminator.git@2.1.77-dev#egg=aminator
+        git+https://github.com/Netflix/aminator.git@2.1.85-dev#egg=aminator
 
 ADD cms /cms/
 WORKDIR /cms/
