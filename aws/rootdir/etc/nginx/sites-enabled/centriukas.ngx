@@ -31,4 +31,9 @@ server {
         proxy_pass http://127.0.0.1:9002/;
         client_max_body_size 100M;
     }
+
+    location /mok/ {
+        proxy_pass http://127.0.0.1:8890/;
+        client_max_body_size 100M;
+    }
 }
