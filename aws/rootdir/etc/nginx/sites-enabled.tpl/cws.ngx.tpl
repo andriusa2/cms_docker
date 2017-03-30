@@ -5,6 +5,21 @@ server {
 
     location / { alias /var/www/html/; }
 
+    location /jau/static/ {
+      alias /var/www/cms_static/;
+      expires 1w;
+    }
+    
+    location /vyr/static/ {
+      alias /var/www/cms_static/;
+      expires 1w;
+    }
+    
+    location /vyr-eng/static/ {
+      alias /var/www/cms_static/;
+      expires 1w;
+    }
+    
     location /jau/ {
         proxy_pass http://127.0.0.1:9000/;
         client_max_body_size 100M;
