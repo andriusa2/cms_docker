@@ -47,10 +47,12 @@ RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     mkdir -p  unpacked_deb/var/local/lib/cms   && \
     chmod 777 unpacked_deb/var/local/cache/cms && \
     chmod 777 unpacked_deb/var/local/log/cms   && \
-    chmod 777 unpacked_deb/var/local/lib/cms
+    chmod 777 unpacked_deb/var/local/lib/cms   && \
+    chmod 755 unpacked_deb/DEBIAN/preinst      && \
+    chmod 755 unpacked_deb/DEBIAN/postrm
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
-RUN ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.2.0-py2.7.egg/cms/server/static /var/www/cms_static
+RUN ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.2.0-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 

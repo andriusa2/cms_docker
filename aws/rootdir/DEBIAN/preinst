@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dpkg-divert --add --rename /etc/nginx/nginx.conf
+dpkg-divert --add --rename /etc/supervisor/supervisord.conf
