@@ -40,7 +40,7 @@ cms:
 
 $(NGINX_SITES_DIR)/%: $(NGINX_SITES_TPL_DIR)/%.tpl
 	mkdir -p rootdir/etc/nginx/sites-enabled
-	sed -e 's/VPC_CIDR/$(VPC_CIDR)/' $< > $@
+	sed -e 's;VPC_CIDR;$(VPC_CIDR);' $< > $@
 
 $(MAIN_CONF): $(MAIN_TPL) $(NGINX_SITES)
 	mkdir -p rootdir/usr/local/etc
