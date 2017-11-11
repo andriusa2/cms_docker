@@ -50,6 +50,7 @@ RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     chmod 777 unpacked_deb/var/local/lib/cms
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
+RUN ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.2.0-py2.7.egg/cms/server/static /var/www/cms_static
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 

@@ -8,10 +8,16 @@ DBPASSWD ?= default1
 metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
 		head -c -1 || echo us-east-1)
+VPC_MAC ?= $(shell $(metadata)/network/interfaces/macs/ | head -n1 | tr -d '/')
+VPC_CIDR ?= $(shell $(metadata)/network/interfaces/macs/$(VPC_MAC)/vpc-ipv4-cidr-block/)
 SECRET_KEY ?= $(shell $(metadata)/instance-id | md5sum | awk '{print $$1}')
 
 BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
 
+NGINX_SITES_TPL_DIR := rootdir/etc/nginx/sites-enabled.tpl
+NGINX_SITES_DIR := rootdir/etc/nginx/sites-enabled
+NGINX_SITES_TPL := $(subst .tpl,,$(notdir $(wildcard $(NGINX_SITES_TPL_DIR)/*.tpl)))
+NGINX_SITES := $(addprefix $(NGINX_SITES_DIR)/,$(NGINX_SITES_TPL))
 MAIN_TPL = cms.conf.tpl
 MAIN_CONF = rootdir/usr/local/etc/cms_main.conf
 WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
@@ -32,7 +38,11 @@ deb: $(DEBFILE)
 cms:
 	git clone $(GIT_CMS)
 
-$(MAIN_CONF): $(MAIN_TPL)
+$(NGINX_SITES_DIR)/%: $(NGINX_SITES_TPL_DIR)/%.tpl
+	mkdir -p rootdir/etc/nginx/sites-enabled
+	sed -e 's;VPC_CIDR;$(VPC_CIDR);' $< > $@
+
+$(MAIN_CONF): $(MAIN_TPL) $(NGINX_SITES)
 	mkdir -p rootdir/usr/local/etc
 	sed \
 		-e 's/SECRET_KEY/$(SECRET_KEY)/' $< > $@
