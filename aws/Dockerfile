@@ -24,15 +24,22 @@ python-netifaces,python-crypto,python-tz,python-six,iso-codes,\
 shared-mime-info,stl-manual,python-beautifulsoup,python-mechanize,\
 python-coverage,python-mock,cgroup-lite,python-requests,\
 python-werkzeug,python-gevent,python-yaml,python-sphinx,supervisor,\
-nginx,patool,htop,ntp \
+nginx,patool,htop,ntp,python-pip \
        ./setup.py install
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
+RUN pip install --root unpacked_deb boto3
 RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
     chown root:root unpacked_deb/usr/local/bin/isolate && \
     chmod +s        unpacked_deb/usr/local/bin/isolate
 
 ADD rootdir/ unpacked_deb/
+
+RUN chmod 755       unpacked_deb/usr/local/bin/send_logs && \
+    chown root:root unpacked_deb/usr/local/bin/send_logs && \
+    chmod +s        unpacked_deb/usr/local/bin/send_logs && \
+    mkdir -p unpacked_deb/etc/rc0.d/ && \
+    ln -sf /usr/local/bin/send_logs unpacked_deb/etc/rc0.d/S01sendLogs
 
 ARG ADMINPW
 ENV ADMINPW $ADMINPW
@@ -52,7 +59,8 @@ RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     chmod 755 unpacked_deb/DEBIAN/postrm
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
-RUN ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.2.0-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
+RUN mkdir -p unpacked_deb/var/www/ && \ 
+    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.2.0-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 
