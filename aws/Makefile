@@ -80,5 +80,5 @@ config.mk:
 			Name=root-device-type,Values=ebs \
 			Name=architecture,Values=x86_64 \
 			Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
-		grep ^IMAGES | sort -k6,6 | \
-		awk 'END { print "AMI_ID="$$5; print "AMI_NAME="$$6}' > $@
+		grep ^IMAGES | sort -k3,3 | \
+		awk -F'\t' 'END { print "AMI_ID="$$7; print "AMI_NAME="$$8}' > $@
