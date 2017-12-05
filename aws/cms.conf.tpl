@@ -84,9 +84,9 @@
     "teacher_listen_address": "",
     "teacher_listen_port":    8890,
     "teacher_active_contests": [1, 2],
-    "teacher_contest_urls": ["https://cms.lmio.lt/jau/", "http://cms.lmio.lt/vyr/"],
+    "teacher_contest_urls": ["/jau/", "/vyr/"],
     "teacher_locale": "lt",
-    "teacher_login_kind": "school",
+    "teacher_login_kind": "district",
 
     "rankings": [],
     "https_certfile": null
