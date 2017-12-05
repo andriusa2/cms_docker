@@ -5,7 +5,7 @@ RUN apt-get -y install gettext python2.7 python-setuptools \
                        checkinstall apache2-utils git
 
 # We can reuse this image for aminating too
-RUN apt-get -y install python-dev python-yaml
+RUN apt-get -y install python-dev python-yaml python-pip
 RUN easy_install \
         git+https://github.com/Netflix/aminator.git@2.1.77-dev#egg=aminator
 
