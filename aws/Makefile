@@ -70,15 +70,15 @@ ami: config.mk $(DEBFILE)
 			--partition 1 \
 			--vm-type hvm \
 			file:///$(DEBFILE)
-
+# see https://wiki.debian.org/Cloud/AmazonEC2Image/Stretch
 config.mk:
 	aws ec2 describe-images \
 			--output text \
 			--region $(REGION) \
-			--owners 099720109477 \
+			--owners 379101102735 \
 			--filters \
 			Name=root-device-type,Values=ebs \
 			Name=architecture,Values=x86_64 \
-			Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' | \
+			Name=name,Values='*debian-stretch*' | \
 		grep ^IMAGES | sort -k3,3 | \
 		awk -F'\t' 'END { print "AMI_ID="$$7; print "AMI_NAME="$$8}' > $@

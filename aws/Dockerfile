@@ -1,18 +1,18 @@
-FROM ubuntu:14.04
+FROM debian:9
 
 RUN apt-get update
 RUN apt-get -y install gettext python2.7 python-setuptools \
-                       checkinstall apache2-utils git
+                       checkinstall apache2-utils git unzip
 
 # We can reuse this image for aminating too
 RUN apt-get -y install python-dev python-yaml python-pip
-RUN easy_install \
-        git+https://github.com/Netflix/aminator.git@2.1.77-dev#egg=aminator
+RUN pip install \
+        git+https://github.com/Netflix/aminator.git#egg=aminator
 
 ADD cms /cms/
 WORKDIR /cms/
 
-RUN ./setup.py build
+RUN make build
 
 RUN echo 'Contest Management System, LMIO2015 version' > description-pak
 RUN checkinstall -y --install=no \
@@ -25,12 +25,12 @@ shared-mime-info,stl-manual,python-beautifulsoup,python-mechanize,\
 python-coverage,python-mock,cgroup-lite,python-requests,\
 python-werkzeug,python-gevent,python-yaml,python-sphinx,supervisor,\
 nginx,patool,htop,ntp,python-pip \
-       ./setup.py install
+       make install
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
 RUN mkdir -p unpacked_deb/usr/share/doc && \
-    wget http://olimp.mif.vu.lt/files/doc/dokumentacijos_rinkinys.zip && \
-    unzip dokumentacijos_rinkinys.zip -d unpacked_deb/usr/share/doc/ && \
+    curl -O http://olimp.mif.vu.lt/files/doc/dokumentacijos_rinkinys.zip && \
+    unzip -q dokumentacijos_rinkinys.zip -d unpacked_deb/usr/share/doc/ && \
     rm dokumentacijos_rinkinys.zip && \
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
     
