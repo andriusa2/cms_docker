@@ -5,7 +5,9 @@ RUN apt-get -y install gettext python2.7 python-setuptools \
                        checkinstall apache2-utils git unzip
 
 # We can reuse this image for aminating too
-RUN apt-get -y install python-dev python-yaml python-pip
+# NB - debian requires cloud-utils for growpart
+RUN apt-get -y install python-dev python-yaml python-pip \
+                       cloud-utils
 RUN pip install \
         git+https://github.com/Netflix/aminator.git#egg=aminator
 
