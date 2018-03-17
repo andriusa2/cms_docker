@@ -28,6 +28,12 @@ nginx,patool,htop,ntp,python-pip \
        ./setup.py install
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
+RUN mkdir -p unpacked_deb/usr/share/doc && \
+    wget http://olimp.mif.vu.lt/files/doc/dokumentacijos_rinkinys.zip && \
+    unzip dokumentacijos_rinkinys.zip -d unpacked_deb/usr/share/doc/ && \
+    rm dokumentacijos_rinkinys.zip && \
+    chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
+    
 RUN pip install --root unpacked_deb boto3
 RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
     chown root:root unpacked_deb/usr/local/bin/isolate && \
