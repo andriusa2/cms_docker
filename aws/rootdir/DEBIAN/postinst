@@ -1,0 +1,3 @@
+#!/bin/sh
+
+adduser cmsuser -c 'CMS default user' --system --group --no-create-home

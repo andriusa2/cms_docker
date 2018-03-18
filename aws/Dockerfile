@@ -16,17 +16,17 @@ WORKDIR /cms/
 
 RUN make build
 
-RUN echo 'Contest Management System, LMIO2015 version' > description-pak
+RUN echo 'Contest Management System, LMIO2018 version' > description-pak
 RUN checkinstall -y --install=no \
         --exclude ${PWD},/etc,/var \
         --requires \
-            fpc,postgresql-client,gettext,python2.7,python-setuptools,\
+fp-compiler,postgresql-client,gettext,python2.7,python-setuptools,\
 python-tornado,python-psycopg2,python-sqlalchemy,python-psutil,\
 python-netifaces,python-crypto,python-tz,python-six,iso-codes,\
 shared-mime-info,stl-manual,python-beautifulsoup,python-mechanize,\
-python-coverage,python-mock,cgroup-lite,python-requests,\
+python-coverage,python-mock,cgroup-tools,python-requests,\
 python-werkzeug,python-gevent,python-yaml,python-sphinx,supervisor,\
-nginx,patool,htop,ntp,python-pip \
+nginx,patool,htop,python-pip,python-bcrypt \
        make install
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
@@ -64,11 +64,12 @@ RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     chmod 777 unpacked_deb/var/local/log/cms   && \
     chmod 777 unpacked_deb/var/local/lib/cms   && \
     chmod 755 unpacked_deb/DEBIAN/preinst      && \
+    chmod 755 unpacked_deb/DEBIAN/postinst     && \
     chmod 755 unpacked_deb/DEBIAN/postrm
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
 RUN mkdir -p unpacked_deb/var/www/ && \ 
-    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.2.0-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
+    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.0-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 
