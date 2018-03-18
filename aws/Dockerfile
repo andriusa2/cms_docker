@@ -36,7 +36,7 @@ RUN mkdir -p unpacked_deb/usr/share/doc && \
     rm dokumentacijos_rinkinys.zip && \
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
     
-RUN pip install --root unpacked_deb boto3
+RUN pip install --root unpacked_deb -I boto3
 RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
     chown root:root unpacked_deb/usr/local/bin/isolate && \
     chmod +s        unpacked_deb/usr/local/bin/isolate
