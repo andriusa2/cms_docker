@@ -2,7 +2,6 @@ GIT_CMS ?= git://github.com/lmio/cms.git -b lmio_v1.3 --recursive
 
 # Since exposing these secrets has very minimal impact on running the Olympiad,
 # I opted for simplicity over security here. Keep it >8 characters.
-ADMINPW ?= default1
 DBPASSWD ?= default1
 
 metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
@@ -29,8 +28,8 @@ PACKER_CONF = packer_conf.json
 
 help:
 	@echo Usage:
-	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
-	@echo "    sudo make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)] [SECRET_KEY=$(SECRET_KEY)]"
+	@echo "    make deb DBPASSWD=grok2" [SECRET_KEY=$(SECRET_KEY)]"
+	@echo "    sudo make ami"
 
 deb: $(DEBFILE)
 

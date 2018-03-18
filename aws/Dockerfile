@@ -49,10 +49,6 @@ RUN chmod 755       unpacked_deb/usr/local/bin/send_logs && \
     mkdir -p unpacked_deb/etc/rc0.d/ && \
     ln -sf /usr/local/bin/send_logs unpacked_deb/etc/rc0.d/S01sendLogs
 
-ARG ADMINPW
-ENV ADMINPW $ADMINPW
-RUN htpasswd -bc unpacked_deb/etc/nginx/htpasswd lioadmin ${ADMINPW}
-
 ARG DBPASSWD
 ENV DBPASSWD $DBPASSWD
 RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf && \
