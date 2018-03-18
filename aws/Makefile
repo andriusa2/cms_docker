@@ -23,15 +23,14 @@ MAIN_CONF = rootdir/usr/local/etc/cms_main.conf
 WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
+PACKER_CONF = packer_conf.json
 
 .PHONY: ami deb help
 
--include config.mk
-
-help: config.mk
+help:
 	@echo Usage:
 	@echo "    make deb ADMINPW=grok1 DBPASSWD=grok2"
-	@echo "    make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)] [SECRET_KEY=$(SECRET_KEY)]"
+	@echo "    sudo make ami [AMI_ID=$(AMI_ID)] [REGION=$(REGION)] [SECRET_KEY=$(SECRET_KEY)]"
 
 deb: $(DEBFILE)
 
@@ -60,25 +59,14 @@ $(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_aws .
 	docker run --rm -v $(CURDIR)/build:/build cms_aws
 
-ami: config.mk $(DEBFILE)
-	docker run --rm --privileged \
-		-v /dev:/dev \
-		-v $(CURDIR)/build:/build cms_aws \
-		aminate -e ec2_aptitude_linux \
-			-B $(AMI_ID) \
-			-r $(REGION) \
-			--partition 1 \
-			--vm-type hvm \
-			file:///$(DEBFILE)
-# see https://wiki.debian.org/Cloud/AmazonEC2Image/Stretch
-config.mk:
-	aws ec2 describe-images \
-			--output text \
-			--region $(REGION) \
-			--owners 379101102735 \
-			--filters \
-			Name=root-device-type,Values=ebs \
-			Name=architecture,Values=x86_64 \
-			Name=name,Values='*debian-stretch*' | \
-		grep ^IMAGES | sort -k3,3 | \
-		awk -F'\t' 'END { print "AMI_ID="$$7; print "AMI_NAME="$$8}' > $@
+# Installs packer. Ideally this should go through package manager,
+# but for now this will have to do.
+packer:
+	curl -o packer.zip https://releases.hashicorp.com/packer/1.2.1/packer_1.2.1_linux_amd64.zip
+	unzip -q packer.zip
+	rm packer.zip
+
+# This needs to be run as root because packer will try to mount new volume.
+ami: $(DEBFILE) $(PACKER_CONF)
+	./packer validate -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
+	./packer build -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
