@@ -11,7 +11,7 @@ VPC_MAC ?= $(shell $(metadata)/network/interfaces/macs/ | head -n1 | tr -d '/')
 VPC_CIDR ?= $(shell $(metadata)/network/interfaces/macs/$(VPC_MAC)/vpc-ipv4-cidr-block/)
 SECRET_KEY ?= $(shell $(metadata)/instance-id | md5sum | awk '{print $$1}')
 
-BUILD_VARS = $(addprefix --build-arg ,ADMINPW=$(ADMINPW) DBPASSWD=$(DBPASSWD))
+BUILD_VARS = $(addprefix --build-arg ,DBPASSWD=$(DBPASSWD))
 
 NGINX_SITES_TPL_DIR := rootdir/etc/nginx/sites-enabled.tpl
 NGINX_SITES_DIR := rootdir/etc/nginx/sites-enabled
