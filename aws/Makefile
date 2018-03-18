@@ -66,6 +66,6 @@ packer:
 	rm packer.zip
 
 # This needs to be run as root because packer will try to mount new volume.
-ami: $(DEBFILE) $(PACKER_CONF)
+ami: $(DEBFILE) $(PACKER_CONF) packer
 	./packer validate -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
 	./packer build -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
