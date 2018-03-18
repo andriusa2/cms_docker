@@ -1,6 +1,6 @@
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
+        listen 8081 default_server;
+        listen [::]:8081 default_server;
         root /var/www/html/int;
         server_name _;
 
@@ -26,8 +26,8 @@ server {
         }
 }
 server {
-        listen 81 default_server;
-        listen [::]:81 default_server;
+        listen 8082 default_server;
+        listen [::]:8082 default_server;
         root /var/www/html/ext;
         server_name _;
 
