@@ -1,4 +1,8 @@
 #!/bin/sh
 
-dpkg-divert --add --rename /etc/nginx/nginx.conf
-dpkg-divert --add --rename /etc/supervisor/supervisord.conf
+if
+  test "$1" = install
+then
+  dpkg-divert --add --rename /etc/nginx/nginx.conf
+  dpkg-divert --add --rename /etc/supervisor/supervisord.conf
+fi

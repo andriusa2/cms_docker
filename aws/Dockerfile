@@ -19,6 +19,7 @@ RUN make build
 RUN echo 'Contest Management System, LMIO2018 version' > description-pak
 RUN checkinstall -y --install=no \
         --exclude ${PWD},/etc,/var \
+        --pkgversion="`date +'%Y%m%d-%H%M'`" \
         --requires \
 fp-compiler,postgresql-client,gettext,python2.7,python-setuptools,\
 python-tornado,python-psycopg2,python-sqlalchemy,python-psutil,\
