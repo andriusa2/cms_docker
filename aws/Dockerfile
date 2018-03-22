@@ -57,7 +57,7 @@ RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf && \
     rm unpacked_deb/usr/local/etc/cms.conf
 ARG RWSPASSWD
 ENV RWSPASSWD $RWSPASSWD
-RUN sed -i "s/RWSPASSWD/${RWSPASSWD}/" unpacked_deb/usr/local/etc/rws_*.conf
+RUN sed -i "s/RWSPASSWD/${RWSPASSWD}/" unpacked_deb/usr/local/etc/rws-*.conf
 
 RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     mkdir -p  unpacked_deb/var/local/log/cms   && \
