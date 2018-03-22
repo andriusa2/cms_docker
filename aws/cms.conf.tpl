@@ -88,6 +88,9 @@
     "teacher_locale": "lt",
     "teacher_login_kind": "district",
 
-    "rankings": [],
+    "rankings": [
+        "http://rwsuser:RWSPASSWD@rws.lmio:8890",
+	"http://rwsuser:RWSPASSWD@rws.lmio:8891",
+	"http://rwsuser:RWSPASSWD@rws.lmio:8892"],
     "https_certfile": null
 }

@@ -55,12 +55,22 @@ ARG DBPASSWD
 ENV DBPASSWD $DBPASSWD
 RUN sed -i "s/DBPASSWD/${DBPASSWD}/" unpacked_deb/usr/local/etc/cms_*.conf && \
     rm unpacked_deb/usr/local/etc/cms.conf
+ARG RWSPASSWD
+ENV RWSPASSWD $RWSPASSWD
+RUN sed -i "s/RWSPASSWD/${RWSPASSWD}/" unpacked_deb/usr/local/etc/rws_*.conf
+
 RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     mkdir -p  unpacked_deb/var/local/log/cms   && \
     mkdir -p  unpacked_deb/var/local/lib/cms   && \
+    mkdir -p  unpacked_deb/var/local/lib/cms/jau && \
+    mkdir -p  unpacked_deb/var/local/lib/cms/vyr && \
+    mkdir -p  unpacked_deb/var/local/lib/cms/vyreng && \
     chmod 777 unpacked_deb/var/local/cache/cms && \
     chmod 777 unpacked_deb/var/local/log/cms   && \
     chmod 777 unpacked_deb/var/local/lib/cms   && \
+    chmod 777 unpacked_deb/var/local/lib/cms/jau && \
+    chmod 777 unpacked_deb/var/local/lib/cms/vyr && \
+    chmod 777 unpacked_deb/var/local/lib/cms/vyreng && \
     chmod 755 unpacked_deb/DEBIAN/preinst      && \
     chmod 755 unpacked_deb/DEBIAN/postinst     && \
     chmod 755 unpacked_deb/DEBIAN/postrm

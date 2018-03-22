@@ -3,6 +3,7 @@ GIT_CMS ?= git://github.com/lmio/cms.git -b lmio_v1.3 --recursive
 # Since exposing these secrets has very minimal impact on running the Olympiad,
 # I opted for simplicity over security here. Keep it >8 characters.
 DBPASSWD ?= default1
+RWSPASSWD ?= default2
 
 metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
@@ -11,7 +12,7 @@ VPC_MAC ?= $(shell $(metadata)/network/interfaces/macs/ | head -n1 | tr -d '/')
 VPC_CIDR ?= $(shell $(metadata)/network/interfaces/macs/$(VPC_MAC)/vpc-ipv4-cidr-block/)
 SECRET_KEY ?= $(shell $(metadata)/instance-id | md5sum | awk '{print $$1}')
 
-BUILD_VARS = $(addprefix --build-arg ,DBPASSWD=$(DBPASSWD))
+BUILD_VARS = $(addprefix --build-arg ,DBPASSWD=$(DBPASSWD) RWSPASSWD=$(RWSPASSWD))
 
 NGINX_SITES_TPL_DIR := rootdir/etc/nginx/sites-enabled.tpl
 NGINX_SITES_DIR := rootdir/etc/nginx/sites-enabled
@@ -28,7 +29,7 @@ PACKER_CONF = packer_conf.json
 
 help:
 	@echo Usage:
-	@echo "    make deb DBPASSWD=grok2" [SECRET_KEY=$(SECRET_KEY)]"
+	@echo "    make deb RWSPASSWD=grok1 DBPASSWD=grok2 [SECRET_KEY=$(SECRET_KEY)]"
 	@echo "    sudo make ami"
 
 deb: $(DEBFILE)
@@ -43,7 +44,7 @@ $(NGINX_SITES_DIR)/%: $(NGINX_SITES_TPL_DIR)/%.tpl
 $(MAIN_CONF): $(MAIN_TPL) $(NGINX_SITES)
 	mkdir -p rootdir/usr/local/etc
 	sed \
-		-e 's/SECRET_KEY/$(SECRET_KEY)/' $< > $@
+		-e 's/SECRET_KEY/$(SECRET_KEY)/' -e 's/RWSPASSWD/$(RWSPASSWD)/' $< > $@
 
 $(WORKER_CONF): $(MAIN_CONF)
 	sed  \
