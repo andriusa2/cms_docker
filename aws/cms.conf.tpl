@@ -80,13 +80,16 @@
     "allow_questions": true,
     "admin_listen_address": "",
     "admin_listen_port":    8889,
+    "data_management_policy_url": "http://www.lmio.mii.vu.lt/?p=viewarticles&id=38",
 
     "teacher_listen_address": "",
     "teacher_listen_port":    8890,
     "teacher_active_contests": [1, 2],
     "teacher_contest_urls": ["/jau/", "/vyr/"],
     "teacher_locale": "lt",
-    "teacher_login_kind": "district",
+    "teacher_login_kind": "school",
+    "teacher_allow_impersonate": false,
+    "teacher_show_results": false,
 
     "rankings": [
         "http://rwsuser:RWSPASSWD@rws.lmio:8890",
