@@ -76,8 +76,13 @@ RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     chmod 755 unpacked_deb/DEBIAN/postrm
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
-RUN mkdir -p unpacked_deb/var/www/ && \ 
-    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.0-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
+RUN test -e unpacked_deb/usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/contest/static && \
+    test -e unpacked_deb/usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/admin/static && \
+    test -e unpacked_deb/usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/static && \
+    mkdir -p unpacked_deb/var/www/ && \ 
+    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/contest/static unpacked_deb/var/www/cws_static && \
+    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/admin/static unpacked_deb/var/www/aws_static && \
+    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 
