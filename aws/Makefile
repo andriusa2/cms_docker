@@ -24,6 +24,7 @@ WORKER_CONF = rootdir/usr/local/etc/cms_worker.conf
 CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
 PACKER_CONF = packer_conf.json
+PACKER_UPDATE_CONF = packer_update_conf.json
 
 .PHONY: ami deb help
 
@@ -70,3 +71,7 @@ packer:
 ami: $(DEBFILE) $(PACKER_CONF) packer
 	./packer validate -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
 	./packer build -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
+
+update-ami: $(DEBFILE) $(PACKER_UPDATE_CONF) packer
+	./packer validate -var 'debfile=$(DEBFILE)' $(PACKER_UPDATE_CONF)
+	./packer build -var 'debfile=$(DEBFILE)' $(PACKER_UPDATE_CONF)
