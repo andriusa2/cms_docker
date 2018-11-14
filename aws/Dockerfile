@@ -6,11 +6,7 @@ RUN apt-get -y install gettext python2.7 python-setuptools \
 
 # We can reuse this image for aminating too
 # NB - debian requires cloud-utils for growpart
-RUN apt-get -y install python-dev python-yaml python-pip \
-                       cloud-utils
-RUN pip install \
-        git+https://github.com/Netflix/aminator.git#egg=aminator
-
+RUN apt-get -y install python-pip cloud-utils
 ADD cms /cms/
 WORKDIR /cms/
 
