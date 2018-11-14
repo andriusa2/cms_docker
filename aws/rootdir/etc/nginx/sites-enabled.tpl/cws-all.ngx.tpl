@@ -51,7 +51,7 @@ server {
         client_max_body_size 100M;
     }
 
-    location ~ ^/(?:test/)(?:jau|vyr|vyr-eng|mok)/static/(.+)$ {
+    location ~ ^/(?:test/)?(?:jau|vyr|vyr-eng|mok)/static/(.+)$ {
         root /var/www/;
         try_files /cws_static/$1 /cms_static/$1 =404;
         expires 1w;
