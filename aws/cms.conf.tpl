@@ -12,34 +12,14 @@
         "Worker":            [
 
             ["worker1.lmio", 26000], ["worker1.lmio", 26001],
-            ["worker1.lmio", 26002], ["worker1.lmio", 26003],
-            ["worker1.lmio", 26004], ["worker1.lmio", 26005],
-            ["worker1.lmio", 26006], ["worker1.lmio", 26007],
-
             ["worker2.lmio", 26000], ["worker2.lmio", 26001],
-            ["worker2.lmio", 26002], ["worker2.lmio", 26003],
-            ["worker2.lmio", 26004], ["worker2.lmio", 26005],
-            ["worker2.lmio", 26006], ["worker2.lmio", 26007],
-
             ["worker3.lmio", 26000], ["worker3.lmio", 26001],
-            ["worker3.lmio", 26002], ["worker3.lmio", 26003],
-            ["worker3.lmio", 26004], ["worker3.lmio", 26005],
-            ["worker3.lmio", 26006], ["worker3.lmio", 26007],
-
             ["worker4.lmio", 26000], ["worker4.lmio", 26001],
-            ["worker4.lmio", 26002], ["worker4.lmio", 26003],
-            ["worker4.lmio", 26004], ["worker4.lmio", 26005],
-            ["worker4.lmio", 26006], ["worker4.lmio", 26007],
-
             ["worker5.lmio", 26000], ["worker5.lmio", 26001],
-            ["worker5.lmio", 26002], ["worker5.lmio", 26003],
-            ["worker5.lmio", 26004], ["worker5.lmio", 26005],
-            ["worker5.lmio", 26006], ["worker5.lmio", 26007],
-
             ["worker6.lmio", 26000], ["worker6.lmio", 26001],
-            ["worker6.lmio", 26002], ["worker6.lmio", 26003],
-            ["worker6.lmio", 26004], ["worker6.lmio", 26005],
-            ["worker6.lmio", 26006], ["worker6.lmio", 26007]
+            ["worker7.lmio", 26000], ["worker7.lmio", 26001],
+            ["worker8.lmio", 26000], ["worker8.lmio", 26001],
+            ["worker9.lmio", 26000], ["worker9.lmio", 26001],
 
         ],
         "ContestWebServer":  [
