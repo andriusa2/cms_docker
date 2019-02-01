@@ -49,7 +49,7 @@ $(MAIN_CONF): $(MAIN_TPL) $(NGINX_SITES)
 
 $(WORKER_CONF): $(MAIN_CONF)
 	sed  \
-		-e 's/worker6.lmio/0.0.0.0/g' \
+		-e 's/worker9.lmio/0.0.0.0/g' \
 		-e '/worker.\.lmio/d' $< > $@
 
 $(CENTRIUKAS_CONF): $(MAIN_CONF)
