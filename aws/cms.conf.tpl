@@ -19,7 +19,7 @@
             ["worker6.lmio", 26000], ["worker6.lmio", 26001],
             ["worker7.lmio", 26000], ["worker7.lmio", 26001],
             ["worker8.lmio", 26000], ["worker8.lmio", 26001],
-            ["worker9.lmio", 26000], ["worker9.lmio", 26001],
+            ["worker9.lmio", 26000], ["worker9.lmio", 26001]
 
         ],
         "ContestWebServer":  [
