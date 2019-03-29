@@ -4,14 +4,14 @@ server {
     set_real_ip_from  VPC_CIDR;
     proxy_buffering off;	
 
-    location = /leaderboard/jau/ {
-        rewrite $ Ranking.html redirect;
+    location = /leaderboard/jau/Ranking.html {
+        rewrite Ranking\.html$ . redirect;
     }
-    location = /leaderboard/vyr/ {
-        rewrite $ Ranking.html redirect;
+    location = /leaderboard/vyr/Ranking.html {
+        rewrite Ranking\.html$ . redirect;
     }
-    location = /leaderboard/vyr-eng/ {
-        rewrite $ Ranking.html redirect;
+    location = /leaderboard/vyr-eng/Ranking.html {
+        rewrite Ranking\.html$ . redirect;
     }
     location /leaderboard/jau/ {
         proxy_pass http://127.0.0.1:8890/;
