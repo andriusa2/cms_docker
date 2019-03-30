@@ -3,6 +3,7 @@ server {
     real_ip_header    X-Forwarded-For;
     set_real_ip_from  VPC_CIDR;
     proxy_buffering off;	
+    absolute_redirect off;
 
     location = /leaderboard/jau/ {
         rewrite $ Ranking.html redirect;
