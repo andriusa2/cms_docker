@@ -56,4 +56,10 @@ server {
         try_files /cws_static/$1 /cms_static/$1 =404;
         expires 1w;
     }
+
+    location ~ ^/(?:test/)?(?:jau|vyr|vyr-eng|mok)/favicon.ico$ {
+        root /var/www/;
+        try_files /cms_static/favicon.ico =404;
+        expires 1w;
+    }
 }
