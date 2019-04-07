@@ -32,7 +32,14 @@ RUN mkdir -p unpacked_deb/usr/share/doc && \
     unzip -q dokumentacijos_rinkinys.zip -d unpacked_deb/usr/share/doc/ && \
     rm dokumentacijos_rinkinys.zip && \
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
-    
+
+RUN curl -L -O https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip && \
+    mkdir -p tmp-fonts && \
+    unzip -q dejavu-fonts-ttf-2.37.zip -d tmp-fonts/ && \
+    mv tmp-fonts/dejavu-fonts-ttf-2.37/ttf/* unpacked_deb/usr/share/doc/cppreference/ && \
+    rm -rf dejavu-fonts-ttf-2.37.zip tmp-fonts && \
+    chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
+
 RUN pip install --root unpacked_deb -I boto3
 RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
     chown root:root unpacked_deb/usr/local/bin/isolate && \
