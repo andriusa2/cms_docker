@@ -23,7 +23,7 @@ python3-netifaces,python3-crypto,python3-tz,python3-six,iso-codes,\
 shared-mime-info,\
 python3-coverage,python3-mock,cgroup-tools,python3-requests,\
 python3-werkzeug,python3-gevent,python3-yaml,python3-sphinx,supervisor,\
-nginx,patool,htop,python3-pip,python3-bcrypt,python3-xdg,libff-dev,\
+nginx,patool,htop,python3-pip,python3-bcrypt,python3-xdg,libffi-dev,\
 libyaml-dev,libpq-dev,libcap-dev,python3-future,python3-babel \
        make install
 
