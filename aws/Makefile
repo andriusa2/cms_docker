@@ -63,7 +63,7 @@ $(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
 # Installs packer. Ideally this should go through package manager,
 # but for now this will have to do.
 packer:
-	curl -o packer.zip https://releases.hashicorp.com/packer/1.2.1/packer_1.2.1_linux_amd64.zip
+	curl -o packer.zip https://releases.hashicorp.com/packer/1.4.5/packer_1.4.5_linux_amd64.zip
 	unzip -q packer.zip
 	rm packer.zip
 
