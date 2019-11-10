@@ -20,7 +20,7 @@ RUN checkinstall -y --install=no \
 fp-compiler,postgresql-client,gettext,python3,python3-setuptools,\
 python3-tornado,python3-psycopg2,python3-sqlalchemy,python3-psutil,\
 python3-netifaces,python3-crypto,python3-tz,python3-six,iso-codes,\
-shared-mime-info,python3-beautifulsoup,\
+shared-mime-info,\
 python3-coverage,python3-mock,cgroup-tools,python3-requests,\
 python3-werkzeug,python3-gevent,python3-yaml,python3-sphinx,supervisor,\
 nginx,patool,htop,python3-pip,python3-bcrypt,python3-xdg,libff-dev,\
@@ -41,7 +41,7 @@ RUN curl -L -O https://github.com/dejavu-fonts/dejavu-fonts/releases/download/ve
     rm -rf dejavu-fonts-ttf-2.37.zip tmp-fonts && \
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
 
-RUN pip3 install --root unpacked_deb -I boto3
+RUN pip3 install --root unpacked_deb -I boto3 beautifulsoup4
 RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
     chown root:root unpacked_deb/usr/local/bin/isolate && \
     chmod +s        unpacked_deb/usr/local/bin/isolate
