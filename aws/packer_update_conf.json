@@ -9,7 +9,7 @@
     {
       "type": "amazon-chroot",
       "access_key": "{{user `aws_access_key`}}",
-      "ami_name": "cms-update-{{isotime | clean_ami_name}}",
+      "ami_name": "cms-update-{{isotime | clean_resource_name}}",
       "region": "{{user `region`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "source_ami_filter": {
