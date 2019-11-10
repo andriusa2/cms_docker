@@ -12,34 +12,14 @@
         "Worker":            [
 
             ["worker1.lmio", 26000], ["worker1.lmio", 26001],
-            ["worker1.lmio", 26002], ["worker1.lmio", 26003],
-            ["worker1.lmio", 26004], ["worker1.lmio", 26005],
-            ["worker1.lmio", 26006], ["worker1.lmio", 26007],
-
             ["worker2.lmio", 26000], ["worker2.lmio", 26001],
-            ["worker2.lmio", 26002], ["worker2.lmio", 26003],
-            ["worker2.lmio", 26004], ["worker2.lmio", 26005],
-            ["worker2.lmio", 26006], ["worker2.lmio", 26007],
-
             ["worker3.lmio", 26000], ["worker3.lmio", 26001],
-            ["worker3.lmio", 26002], ["worker3.lmio", 26003],
-            ["worker3.lmio", 26004], ["worker3.lmio", 26005],
-            ["worker3.lmio", 26006], ["worker3.lmio", 26007],
-
             ["worker4.lmio", 26000], ["worker4.lmio", 26001],
-            ["worker4.lmio", 26002], ["worker4.lmio", 26003],
-            ["worker4.lmio", 26004], ["worker4.lmio", 26005],
-            ["worker4.lmio", 26006], ["worker4.lmio", 26007],
-
             ["worker5.lmio", 26000], ["worker5.lmio", 26001],
-            ["worker5.lmio", 26002], ["worker5.lmio", 26003],
-            ["worker5.lmio", 26004], ["worker5.lmio", 26005],
-            ["worker5.lmio", 26006], ["worker5.lmio", 26007],
-
             ["worker6.lmio", 26000], ["worker6.lmio", 26001],
-            ["worker6.lmio", 26002], ["worker6.lmio", 26003],
-            ["worker6.lmio", 26004], ["worker6.lmio", 26005],
-            ["worker6.lmio", 26006], ["worker6.lmio", 26007]
+            ["worker7.lmio", 26000], ["worker7.lmio", 26001],
+            ["worker8.lmio", 26000], ["worker8.lmio", 26001],
+            ["worker9.lmio", 26000], ["worker9.lmio", 26001]
 
         ],
         "ContestWebServer":  [
@@ -73,21 +53,28 @@
     "submit_local_copy_path": "%s/submissions/",
     "ip_lock": true,
     "block_hidden_users": false,
-    "is_proxy_used": true,
+    "num_proxies_used": 1,
     "max_submission_length": 100000,
     "max_input_length": 5000000,
-    "stl_path": "/usr/share/doc/stl-manual/html/",
+    "stl_path": "/usr/share/doc/cppreference/",
     "allow_questions": true,
     "admin_listen_address": "",
     "admin_listen_port":    8889,
+    "data_management_policy_url": "http://www.lmio.mii.vu.lt/?p=viewarticles&id=38",
 
     "teacher_listen_address": "",
     "teacher_listen_port":    8890,
     "teacher_active_contests": [1, 2],
-    "teacher_contest_urls": ["https://cms.lmio.lt/jau/", "http://cms.lmio.lt/vyr/"],
+    "teacher_contest_urls": ["/jau/", "/vyr/"],
     "teacher_locale": "lt",
-    "teacher_login_kind": "school",
+    "teacher_login_kind": "district",
+    "teacher_allow_impersonate": false,
+    "teacher_show_results": false,
 
-    "rankings": [],
+    "rankings": [
+        "http://rwsuser:RWSPASSWD@rws.lmio:8890",
+	"http://rwsuser:RWSPASSWD@rws.lmio:8891",
+	"http://rwsuser:RWSPASSWD@rws.lmio:8892"],
+    "ranking_contests": [[1], [2], []],
     "https_certfile": null
 }

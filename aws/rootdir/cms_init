@@ -35,6 +35,9 @@ case "$1" in
     cws)
         _enable cws
         ;;
+    rws)
+        _enable rws
+	;;
 esac
 
 supervisorctl reload || :
