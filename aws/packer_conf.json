@@ -16,7 +16,8 @@
         "filters": {
           "virtualization-type": "hvm",
           "name": "*debian-10-*",
-          "root-device-type": "ebs"
+          "root-device-type": "ebs",
+	  "architecture": "x86_64"
         },
         "owners": ["136693071363"],
         "most_recent": true
