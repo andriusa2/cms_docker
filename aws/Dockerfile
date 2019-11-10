@@ -1,29 +1,30 @@
-FROM debian:9
+FROM debian:buster-backports
 
 RUN apt-get update
-RUN apt-get -y install gettext python2.7 python-setuptools \
+RUN apt-get -y install gettext python3 python3-setuptools \
                        checkinstall apache2-utils git unzip
 
 # We can reuse this image for aminating too
 # NB - debian requires cloud-utils for growpart
-RUN apt-get -y install python-pip cloud-utils
+RUN apt-get -y install python3-pip cloud-utils libcap-dev python3-future python3-babel
 ADD cms /cms/
 WORKDIR /cms/
 
 RUN make build
 
-RUN echo 'Contest Management System, LMIO2018 version' > description-pak
+RUN echo 'Contest Management System, LMIO2019 version' > description-pak
 RUN checkinstall -y --install=no \
         --exclude ${PWD},/etc,/var \
         --pkgversion="`date +'%Y%m%d-%H%M'`" \
         --requires \
-fp-compiler,postgresql-client,gettext,python2.7,python-setuptools,\
-python-tornado,python-psycopg2,python-sqlalchemy,python-psutil,\
-python-netifaces,python-crypto,python-tz,python-six,iso-codes,\
-shared-mime-info,stl-manual,python-beautifulsoup,python-mechanize,\
-python-coverage,python-mock,cgroup-tools,python-requests,\
-python-werkzeug,python-gevent,python-yaml,python-sphinx,supervisor,\
-nginx,patool,htop,python-pip,python-bcrypt \
+fp-compiler,postgresql-client,gettext,python3,python3-setuptools,\
+python3-tornado,python3-psycopg2,python3-sqlalchemy,python3-psutil,\
+python3-netifaces,python3-crypto,python3-tz,python3-six,iso-codes,\
+shared-mime-info,python3-beautifulsoup,\
+python3-coverage,python3-mock,cgroup-tools,python3-requests,\
+python3-werkzeug,python3-gevent,python3-yaml,python3-sphinx,supervisor,\
+nginx,patool,htop,python3-pip,python3-bcrypt,python3-xdg,libff-dev,\
+libyaml-dev,libpq-dev,libcap-dev,python3-future,python3-babel \
        make install
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
@@ -40,7 +41,7 @@ RUN curl -L -O https://github.com/dejavu-fonts/dejavu-fonts/releases/download/ve
     rm -rf dejavu-fonts-ttf-2.37.zip tmp-fonts && \
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
 
-RUN pip install --root unpacked_deb -I boto3
+RUN pip3 install --root unpacked_deb -I boto3
 RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
     chown root:root unpacked_deb/usr/local/bin/isolate && \
     chmod +s        unpacked_deb/usr/local/bin/isolate
@@ -79,13 +80,13 @@ RUN mkdir -p  unpacked_deb/var/local/cache/cms && \
     chmod 755 unpacked_deb/DEBIAN/postrm
 
 RUN ln -sf /usr/share/zoneinfo/Europe/Vilnius unpacked_deb/etc/localtime
-RUN test -e unpacked_deb/usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/contest/static && \
-    test -e unpacked_deb/usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/admin/static && \
-    test -e unpacked_deb/usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/static && \
+RUN test -e unpacked_deb/usr/local/lib/python3*/dist-packages/cms-*.egg/cms/server/contest/static && \
+    test -e unpacked_deb/usr/local/lib/python3*/dist-packages/cms-*.egg/cms/server/admin/static && \
+    test -e unpacked_deb/usr/local/lib/python3*/dist-packages/cms-*.egg/cms/server/static && \
     mkdir -p unpacked_deb/var/www/ && \ 
-    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/contest/static unpacked_deb/var/www/cws_static && \
-    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/admin/static unpacked_deb/var/www/aws_static && \
-    ln -sf /usr/local/lib/python2.7/dist-packages/cms-1.3.2-py2.7.egg/cms/server/static unpacked_deb/var/www/cms_static
+    ln -sf /usr/local/lib/python3*/dist-packages/cms-*.egg/cms/server/contest/static unpacked_deb/var/www/cws_static && \
+    ln -sf /usr/local/lib/python3*/dist-packages/cms-*.egg/cms/server/admin/static unpacked_deb/var/www/aws_static && \
+    ln -sf /usr/local/lib/python3*/dist-packages/cms-*.egg/cms/server/static unpacked_deb/var/www/cms_static
 
 RUN dpkg-deb -b unpacked_deb cms_aws-1_amd64.deb
 
