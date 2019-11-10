@@ -17,7 +17,7 @@ RUN checkinstall -y --install=no \
         --exclude ${PWD},/etc,/var \
         --pkgversion="`date +'%Y%m%d-%H%M'`" \
         --requires \
-fp-compiler,postgresql-client,gettext,python3,python3-setuptools,\
+postgresql-client,gettext,python3,python3-setuptools,\
 python3-psycopg2,python3-sqlalchemy,python3-psutil,\
 python3-netifaces,python3-crypto,python3-tz,python3-six,iso-codes,\
 shared-mime-info,\
