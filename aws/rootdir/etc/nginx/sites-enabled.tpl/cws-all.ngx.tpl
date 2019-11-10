@@ -17,12 +17,32 @@ server {
     }
 
     location /jau/ {
-        proxy_pass http://127.0.0.1:9000/lmio31-1-jau/;
+        proxy_pass http://127.0.0.1:9000/;
         client_max_body_size 100M;
     }
 
     location /vyr/ {
-        proxy_pass http://127.0.0.1:9000/lmio31-1-vyr/;
+        proxy_pass http://127.0.0.1:9001/;
+        client_max_body_size 100M;
+    }
+
+    location /vyr-eng/ {
+        proxy_pass http://127.0.0.1:9002/;
+        client_max_body_size 100M;
+    }
+
+    location /test/jau/ {
+        proxy_pass http://127.0.0.1:9003/;
+        client_max_body_size 100M;
+    }
+
+    location /test/vyr/ {
+        proxy_pass http://127.0.0.1:9004/;
+        client_max_body_size 100M;
+    }
+
+    location /test/vyr-eng/ {
+        proxy_pass http://127.0.0.1:9005/;
         client_max_body_size 100M;
     }
 
