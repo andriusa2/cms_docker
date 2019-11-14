@@ -67,7 +67,8 @@
     "teacher_active_contests": [1, 2],
     "teacher_contest_urls": ["/jau/", "/vyr/"],
     "teacher_locale": "lt",
-    "teacher_login_kind": "district",
+    "teacher_login_kind": "school",
+    "teacher_allow_registration": true,
     "teacher_allow_impersonate": false,
     "teacher_show_results": false,
 
