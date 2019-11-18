@@ -9,6 +9,11 @@ server {
                 rewrite  ^/(.*)$  https://$host/$1 redirect;
         }
         rewrite ^/([^.]*[^/])$ https://$host/$1/ redirect;
+        location ~* ^.*/favicon\.ico$ {
+                root /var/www
+                try_files /cms_static/favicon.ico =404;
+                expires max;
+        }
         location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml)$ {
                 try_files $uri =404;
                 expires max;
@@ -35,6 +40,11 @@ server {
                 rewrite  ^/(.*)$  https://$host/$1 redirect;
         }
         rewrite ^/([^.]*[^/])$ https://$host/$1/ redirect;
+        location ~* ^.*/favicon\.ico$ {
+                root /var/www
+                try_files /cms_static/favicon.ico =404;
+                expires max;
+        }
         location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml)$ {
                 try_files $uri =404;
                 expires max;

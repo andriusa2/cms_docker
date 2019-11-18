@@ -10,6 +10,12 @@ server {
         client_max_body_size 100M;
     }
 
+    location ~* ^.*/favicon\.ico$ {
+        root /var/www;
+        try_files /cms_static/favicon.ico =404;
+        expires 1w;
+    }
+
     location ~ ^/centriukas/static/(.+)$ {
         root /var/www/;
         try_files /aws_static/$1 /cms_static/$1 =404;
