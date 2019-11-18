@@ -10,7 +10,7 @@ server {
         }
         rewrite ^/([^.]*[^/])$ https://$host/$1/ redirect;
         location ~* ^.*/favicon\.ico$ {
-                root /var/www
+                root /var/www;
                 try_files /cms_static/favicon.ico =404;
                 expires max;
         }
@@ -41,7 +41,7 @@ server {
         }
         rewrite ^/([^.]*[^/])$ https://$host/$1/ redirect;
         location ~* ^.*/favicon\.ico$ {
-                root /var/www
+                root /var/www;
                 try_files /cms_static/favicon.ico =404;
                 expires max;
         }
