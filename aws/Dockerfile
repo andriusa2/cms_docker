@@ -32,7 +32,8 @@ RUN mkdir -p unpacked_deb/usr/share/doc && \
     curl -O http://olimp.mif.vu.lt/files/doc/dokumentacijos_rinkinys.zip && \
     unzip -q dokumentacijos_rinkinys.zip -d unpacked_deb/usr/share/doc/ && \
     rm dokumentacijos_rinkinys.zip && \
-    chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
+    chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc && \
+    ln -sf /usr/share/doc/cppreference unpacked_deb/usr/share/doc/cppreference/en
 
 RUN curl -L -O https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip && \
     mkdir -p tmp-fonts && \
