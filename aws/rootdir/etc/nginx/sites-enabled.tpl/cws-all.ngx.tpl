@@ -4,7 +4,9 @@ server {
     set_real_ip_from  VPC_CIDR;
     set_real_ip_from  127.0.0.1/32;
 	
-    location / { alias /var/www/html/; }
+    location / {
+        proxy_pass http://127.0.0.1:8081;
+    }
 
     location /centriukas/ {
         proxy_pass http://127.0.0.1:8889/;
