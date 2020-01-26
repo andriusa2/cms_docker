@@ -49,12 +49,7 @@ RUN chmod 755       unpacked_deb/usr/local/bin/isolate && \
 
 ADD rootdir/ unpacked_deb/
 
-RUN chmod 755       unpacked_deb/usr/local/bin/send_logs && \
-    chown root:root unpacked_deb/usr/local/bin/send_logs && \
-    chmod +s        unpacked_deb/usr/local/bin/send_logs && \
-    mkdir -p unpacked_deb/etc/rc0.d/ && \
-    ln -sf /usr/local/bin/send_logs unpacked_deb/etc/rc0.d/S01sendLogs && \
-    rm -r unpacked_deb/etc/nginx/sites-enabled.tpl/
+RUN rm -r unpacked_deb/etc/nginx/sites-enabled.tpl/
 
 ARG DBPASSWD
 ENV DBPASSWD $DBPASSWD
