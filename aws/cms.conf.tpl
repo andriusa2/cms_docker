@@ -68,6 +68,7 @@
     "teacher_contest_urls": ["/jau/", "/vyr/"],
     "teacher_locale": "lt",
     "teacher_login_kind": "district",
+    "teacher_allow_contestant_leave": true,
     "teacher_allow_registration": false,
     "teacher_allow_impersonate": false,
     "teacher_show_results": false,
