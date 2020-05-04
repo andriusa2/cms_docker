@@ -71,4 +71,12 @@ server {
         try_files /cms_static/favicon.ico =404;
         expires 1w;
     }
+
+    # More hacks for cppreference/mwiki
+    rewrite ^(/(?:test/)?(?:jau|vyr|vyr-eng|mok))/stl/en/cpp.*/http.+$ $1/documentation redirect;
+
+    location ~ ^/(?:test/)?(?:jau|vyr|vyr-eng|mok)/stl/.*mwiki {
+        return 410;
+        expires max;
+    }
 }
