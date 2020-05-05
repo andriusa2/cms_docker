@@ -8,7 +8,7 @@ server {
         if ($http_x_forwarded_proto = "http") {
                 rewrite  ^/(.*)$  https://$host/$1 redirect;
         }
-        rewrite ^/([^.]*[^/])$ https://$host/$1/ redirect;
+        rewrite ^/([^.]*[^/])$ /$1/ redirect;
         location ~* ^.*/favicon\.ico$ {
                 root /var/www;
                 try_files /cms_static/favicon.ico =404;
@@ -27,7 +27,7 @@ server {
                 expires max;
         }
         location / {
-                rewrite ^/(.*)$ https://$host/ redirect;
+                return 302 /;
         }
 }
 server {
@@ -39,7 +39,7 @@ server {
         if ($http_x_forwarded_proto = "http") {
                 rewrite  ^/(.*)$  https://$host/$1 redirect;
         }
-        rewrite ^/([^.]*[^/])$ https://$host/$1/ redirect;
+        rewrite ^/([^.]*[^/])$ /$1/ redirect;
         location ~* ^.*/favicon\.ico$ {
                 root /var/www;
                 try_files /cms_static/favicon.ico =404;
@@ -58,6 +58,6 @@ server {
                 expires max;
         }
         location / {
-                rewrite ^/(.*)$ https://$host/ redirect;
+                return 302 /;
         }
 }
