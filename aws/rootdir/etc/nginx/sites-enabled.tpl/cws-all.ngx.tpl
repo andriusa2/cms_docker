@@ -3,6 +3,7 @@ server {
     real_ip_header    X-Forwarded-For;
     set_real_ip_from  VPC_CIDR;
     set_real_ip_from  127.0.0.1/32;
+    absolute_redirect off;
 	
     location / {
         proxy_pass http://127.0.0.1:8081;
