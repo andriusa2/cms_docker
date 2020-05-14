@@ -3,7 +3,7 @@ server {
         listen [::]:8081 default_server;
         root /var/www/html/int;
         server_name _;
-
+        absolute_redirect off;
 
         if ($http_x_forwarded_proto = "http") {
                 rewrite  ^/(.*)$  https://$host/$1 redirect;
@@ -35,6 +35,7 @@ server {
         listen [::]:8082 default_server;
         root /var/www/html/ext;
         server_name _;
+        absolute_redirect off;
 
         if ($http_x_forwarded_proto = "http") {
                 rewrite  ^/(.*)$  https://$host/$1 redirect;
