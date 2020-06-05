@@ -54,7 +54,7 @@
     "ip_lock": true,
     "block_hidden_users": false,
     "num_proxies_used": 1,
-    "max_submission_length": 100000,
+    "max_submission_length": 5000000,
     "max_input_length": 5000000,
     "stl_path": "/usr/share/doc/cppreference/",
     "allow_questions": true,
@@ -77,6 +77,6 @@
         "http://rwsuser:RWSPASSWD@rws.lmio:8890",
 	"http://rwsuser:RWSPASSWD@rws.lmio:8891",
 	"http://rwsuser:RWSPASSWD@rws.lmio:8892"],
-    "ranking_contests": [[1], [2], []],
+    "ranking_contests": [[], [], []],
     "https_certfile": null
 }
