@@ -1,4 +1,4 @@
-GIT_CMS ?= git://github.com/andriusa2/cms.git -b lmio31-runtime --recursive
+GIT_CMS ?= git://github.com/andriusa2/cms.git -b lmio32-runtime --recursive
 
 # Since exposing these secrets has very minimal impact on running the Olympiad,
 # I opted for simplicity over security here. Keep it >8 characters.
