@@ -8,6 +8,8 @@
   "builders": [
     {
       "type": "amazon-chroot",
+      "nvme_device_path": "/dev/nvme1n1p",
+      "device_path": "/dev/sdf",
       "access_key": "{{user `aws_access_key`}}",
       "ami_name": "cms-release-{{isotime | clean_resource_name}}",
       "region": "{{user `region`}}",
