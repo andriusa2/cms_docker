@@ -67,11 +67,12 @@
     "teacher_active_contests": [1, 2],
     "teacher_contest_urls": ["/jau/", "/vyr/"],
     "teacher_locale": "lt",
-    "teacher_login_kind": "district",
-    "teacher_allow_contestant_leave": true,
+    "teacher_login_kind": "school",
+    "teacher_allow_contestant_leave": false,
     "teacher_allow_registration": false,
-    "teacher_allow_impersonate": false,
-    "teacher_show_results": false,
+    "teacher_allow_impersonate": true,
+    "teacher_show_results": true,
+    "teacher_show_task_statements": "never",
 
     "rankings": [
         "http://rwsuser:RWSPASSWD@rws.lmio:8890",
