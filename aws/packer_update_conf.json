@@ -31,11 +31,20 @@
       "source": "{{user `debfile`}}",
       "destination": "/tmp/cms_aws-1_amd64.deb"
     },
+	  {
+      "type": "file",
+      "source": "send_logs/",
+      "destination": "/tmp/",
+    },
     {
       "type": "shell",
       "inline": [
         "apt-get update",
-        "apt install -y /tmp/cms_aws-1_amd64.deb"
+        "apt install -y /tmp/cms_aws-1_amd64.deb",
+        "install -g root -o root -m 755 /tmp/cmsSendLogs /usr/local/bin/cmsSendLogs",
+        "install -g root -o root -m 644 /tmp/cms-send-logs.service /etc/systemd/system/cms-send-logs.service",
+        "systemctl daemon-reload",
+        "systemctl enable cms-send-logs",
       ]
     }
   ]
