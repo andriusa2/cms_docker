@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+import boto3
+import requests
+import os
+import subprocess
+import time
+
+LOG_PATH = '/var/local/log/cms'
+BUCKET_NAME = 'lmio-cms-logs'
+NGINX_LOG_PATH = '/var/log/nginx'
+
+def try_compress(bucket, s3_prefix, path, archive_name, upload_timestamp):
+    archive_path = "/tmp/{}-{}.tar.gz".format(archive_name, upload_timestamp)
+    try:
+        result = subprocess.run(["tar", "-czf", archive_path, path])
+        # exit code 1 means that "some files differ", which can happen
+        # when archiving larger log files. In our case it's mostly fine
+        # to ignore such error.
+        if result.returncode not in (0, 1):
+            raise Exception("Bad exit code for tar")
+        bucket.upload_file(Filename=archive_path, Key='/'.join([s3_prefix, upload_timestamp, archive_path.rsplit('/',1)[-1]]))
+        os.remove(archive_path)
+    except Exception:
+        for root, _, files in os.walk(path):
+            if not files:
+                continue
+            for f in files:
+                if not os.path.islink(os.path.join(root, f)):
+                    bucket.upload_file(
+                        Filename=os.path.join(root, f),
+                        Key='/'.join([s3_prefix, upload_timestamp, root.rsplit('/', 1)[-1], f])
+                    )
+    
+
+def send_logs():
+    instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id').text
+    
+    ec2 = boto3.client('ec2', region_name='eu-west-1')
+    instance_tags = ec2.describe_instances(InstanceIds=[instance_id])['Reservations'][0]['Instances'][0]['Tags']
+    instance_tags_dict = {a['Key']: a['Value'] for a in instance_tags}
+    instance_role = instance_tags_dict.get('Role', 'misc')
+    contest_name = instance_tags_dict.get('Contest', 'lmioNA').upper()
+    
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(BUCKET_NAME)
+    upload_timestamp = str(int(time.time()))
+    s3_prefix = '/'.join([contest_name, instance_role, instance_id])
+    try_compress(bucket, s3_prefix, LOG_PATH, "cms-logs", upload_timestamp)
+    try_compress(bucket, s3_prefix, NGINX_LOG_PATH, "nginx", upload_timestamp)
+
+if __name__ == '__main__':
+    send_logs()
+

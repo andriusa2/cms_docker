@@ -1,0 +1,11 @@
+[Unit]
+Description=Send cms and nginx logs to s3 when instance is terminating.
+
+[Service]
+Type=oneshot
+RemainAfterExit=True
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/cmsSendLogs
+
+[Install]
+WantedBy=multi-user.target
