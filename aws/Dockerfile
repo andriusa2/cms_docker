@@ -43,8 +43,8 @@ RUN curl -L -O https://github.com/dejavu-fonts/dejavu-fonts/releases/download/ve
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
 
 RUN pip3 install --root unpacked_deb -I boto3 beautifulsoup4 'tornado>=4.5,<4.6'
-RUN chmod 6755       unpacked_deb/usr/local/bin/isolate && \
-    chown root:root unpacked_deb/usr/local/bin/isolate
+RUN chown root:root unpacked_deb/usr/local/bin/isolate && \
+    chmod 6755      unpacked_deb/usr/local/bin/isolate
 
 ADD rootdir/ unpacked_deb/
 
