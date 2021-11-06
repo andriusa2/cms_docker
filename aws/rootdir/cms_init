@@ -7,6 +7,9 @@ set -euo pipefail
 # /cms_init cws
 # /cms_init worker
 
+# Give default AWS/debian user access to cms logs/etc.
+usermod -aG cmsuser admin
+
 _hyperthreading() {
     # Disabling hyperthreading
     for cpunum in $(
@@ -34,6 +37,7 @@ case "$1" in
         ;;
     cws)
         _enable cws
+        echo '*/30 8-16 * * * cmsuser /usr/local/bin/cmsSendLogs' > /etc/cron.d/periodicCmsSendLogs
         ;;
     rws)
         _enable rws
