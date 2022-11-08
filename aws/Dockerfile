@@ -1,4 +1,4 @@
-FROM debian:buster-backports
+FROM debian:bullseye-backports
 
 RUN apt-get update
 RUN apt-get -y install gettext python3 python3-setuptools \

@@ -17,7 +17,7 @@
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
-          "name": "*debian-10-*",
+          "name": "*debian-11-*",
           "root-device-type": "ebs",
 	  "architecture": "x86_64"
         },
