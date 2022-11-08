@@ -35,7 +35,7 @@
 	  {
       "type": "file",
       "source": "send_logs/",
-      "destination": "/tmp/",
+      "destination": "/tmp/"
     },
     {
       "type": "shell",
@@ -45,7 +45,7 @@
         "install -g root -o root -m 755 /tmp/cmsSendLogs /usr/local/bin/cmsSendLogs",
         "install -g root -o root -m 644 /tmp/cms-send-logs.service /etc/systemd/system/cms-send-logs.service",
         "systemctl daemon-reload",
-        "systemctl enable cms-send-logs",
+        "systemctl enable cms-send-logs"
       ]
     }
   ]
