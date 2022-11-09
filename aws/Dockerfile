@@ -7,6 +7,7 @@ RUN apt-get -y install gettext python3 python3-setuptools \
 # We can reuse this image for aminating too
 # NB - debian requires cloud-utils for growpart
 RUN apt-get -y install python3-pip cloud-utils libcap-dev python3-future python3-babel
+ADD dejavu-fonts-ttf-2.37.zip html_book_20190607.zip /
 ADD cms /cms/
 WORKDIR /cms/
 
@@ -29,17 +30,14 @@ libyaml-dev,libpq-dev,libcap-dev,python3-future,python3-babel \
 
 RUN dpkg-deb -R cms_*.deb unpacked_deb
 RUN mkdir -p unpacked_deb/usr/share/doc && \
-    curl -O http://olimp.mif.vu.lt/files/doc/dokumentacijos_rinkinys.zip && \
-    unzip -q dokumentacijos_rinkinys.zip -d unpacked_deb/usr/share/doc/ && \
-    rm dokumentacijos_rinkinys.zip && \
-    chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc && \
-    ln -sf /usr/share/doc/cppreference unpacked_deb/usr/share/doc/cppreference/en
+    unzip -q /html_book_20190607.zip -d unpacked_deb/usr/share/doc/ 'reference/*' && \
+    mv unpacked_deb/usr/share/doc/reference unpacked_deb/usr/share/doc/cppreference && \
+    chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
 
-RUN curl -L -O https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip && \
-    mkdir -p tmp-fonts && \
-    unzip -q dejavu-fonts-ttf-2.37.zip -d tmp-fonts/ && \
+RUN mkdir -p tmp-fonts && \
+    unzip -q /dejavu-fonts-ttf-2.37.zip -d tmp-fonts/ && \
     mv tmp-fonts/dejavu-fonts-ttf-2.37/ttf/* unpacked_deb/usr/share/doc/cppreference/ && \
-    rm -rf dejavu-fonts-ttf-2.37.zip tmp-fonts && \
+    rm -rf tmp-fonts && \
     chmod -R u+rwX,go=rX unpacked_deb/usr/share/doc
 
 RUN pip3 install --root unpacked_deb -I boto3 beautifulsoup4 'tornado>=4.5,<4.6'

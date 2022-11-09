@@ -25,6 +25,12 @@ CENTRIUKAS_CONF = rootdir/usr/local/etc/cms_centriukas.conf
 DEBFILE = build/cms_aws-1_amd64.deb
 PACKER_CONF = packer_conf.json
 PACKER_UPDATE_CONF = packer_update_conf.json
+CPPREFERENCE = html_book_20190607.zip
+DEJAVU = dejavu-fonts-ttf-2.37.zip
+
+# Not a fan of deeplinking here, but this is simplest approach without vendoring
+CPPREFERENCE_URL = https://upload.cppreference.com/mwiki/images/b/b2/html_book_20190607.zip
+DEJAVU_URL = https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.zip
 
 .PHONY: ami deb help
 
@@ -37,6 +43,12 @@ deb: $(DEBFILE)
 
 cms:
 	git clone $(GIT_CMS)
+
+$(CPPREFERENCE):
+	wget -nc -O $@ $(CPPREFERENCE_URL)
+
+$(DEJAVU):
+	wget -nc -O $@ $(DEJAVU_URL)
 
 $(NGINX_SITES_DIR)/%: $(NGINX_SITES_TPL_DIR)/%.tpl
 	mkdir -p rootdir/etc/nginx/sites-enabled
@@ -56,7 +68,7 @@ $(CENTRIUKAS_CONF): $(MAIN_CONF)
 	sed \
 		-e 's/centriukas.lmio/0.0.0.0/g' $< > $@
 
-$(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) cms Dockerfile
+$(DEBFILE): $(WORKER_CONF) $(CENTRIUKAS_CONF) $(CPPREFERENCE) $(DEJAVU) cms Dockerfile
 	docker build $(BUILD_VARS) -t cms_aws .
 	docker run --rm -v $(CURDIR)/build:/build cms_aws
 
