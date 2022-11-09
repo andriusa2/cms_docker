@@ -21,7 +21,7 @@ RUN checkinstall -y --install=no \
 postgresql-client,gettext,python3,python3-setuptools,\
 python3-psycopg2,python3-sqlalchemy,python3-psutil,\
 python3-netifaces,python3-crypto,python3-tz,python3-six,iso-codes,\
-shared-mime-info,\
+shared-mime-info,zip,\
 python3-coverage,python3-mock,cgroup-tools,python3-requests,\
 python3-werkzeug,python3-gevent,python3-yaml,python3-sphinx,supervisor,\
 nginx,patool,htop,python3-pip,python3-bcrypt,python3-xdg,libffi-dev,\
