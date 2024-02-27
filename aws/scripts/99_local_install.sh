@@ -3,11 +3,12 @@
 set -eux
 
 # Precreate tmp dirs
-mkdir -p /tmp/{cms,cms-misc-bin,cms-misc-services,nginx,supervisor,systemd/resolved.conf.d,www}
+mkdir -p /tmp/{cms,cms-misc-bin,cms-misc-services,grub,nginx,supervisor,systemd/resolved.conf.d,www}
 # Copy the files to expected tmp places
 cp -r rootdir/usr/local/etc/* /tmp/cms/
 cp -r send_logs/cmsSendLogs /tmp/cms-misc-bin/
 cp -r send_logs/cms-send-logs.service /tmp/cms-misc-services/
+cp -r rootdir/etc/defaults/grub.d/* /tmp/grub/
 cp -r rootdir/etc/nginx/* /tmp/nginx/
 cp -r rootdir/etc/supervisor/* /tmp/supervisor/
 cp -r rootdir/etc/systemd/resolved.conf.d/* /tmp/systemd/resolved.conf.d/
