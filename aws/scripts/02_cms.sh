@@ -37,7 +37,7 @@ pyenv install -s 3.9
 
 # Now set up and activate venv for it
 pyenv virtualenv 3.9 cms-venv
-pyenv sh-activate cms-venv
+pyenv activate cms-venv
 
 # Put CMS into /usr/local/lib/cms
 CMS_PATH='/usr/local/lib/cms'
