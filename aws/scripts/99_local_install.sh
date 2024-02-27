@@ -13,8 +13,8 @@ cp -r rootdir/etc/supervisor/* /tmp/supervisor/
 cp -r rootdir/var/www/* /tmp/www/
 cp dejavu-fonts-ttf-2.37.zip /tmp/
 cp html-book-20230810.zip /tmp/
-/bin/sh scripts/00_common_deps.sh
-/bin/sh scripts/01_pyenv.sh
-/bin/sh scripts/02_cms.sh
-/bin/sh scripts/03_configs_and_webserving.sh
-/bin/sh scripts/04_helper_binaries.sh
+/bin/bash scripts/00_common_deps.sh
+/bin/bash scripts/01_pyenv.sh
+/bin/bash scripts/02_cms.sh
+/bin/bash scripts/03_configs_and_webserving.sh
+/bin/bash scripts/04_helper_binaries.sh

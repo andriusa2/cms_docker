@@ -28,3 +28,4 @@ git clone 'https://github.com/pyenv/pyenv-virtualenv.git' "$PYENV_ROOT/plugins/p
   # shellcheck disable=SC2016
   echo 'eval "$(pyenv init -)"'
 } | tee -a ~/.bashrc >> ~/.profile
+
