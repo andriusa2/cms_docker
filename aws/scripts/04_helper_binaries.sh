@@ -13,7 +13,7 @@ sudo apt-get -y install python3-pip python3-venv
 
 python3 -m venv /usr/local/lib/pyenv/versions/aws-automation
 eval "$(/usr/local/lib/pyenv/bin/pyenv sh-activate aws-automation)"
-pip3 install boto3 psycopg2
+pip3 install boto3 ec2-metadata psycopg2 requests
 
 # Adjust python shebangs to venv python
 # TODO - this normally should be done via setuptools, so fix that.

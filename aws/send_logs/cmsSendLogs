@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import boto3
-import requests
+from ec2_metadata import ec2_metadata
 import os
 import subprocess
 import time
@@ -33,7 +33,7 @@ def try_compress(bucket, s3_prefix, path, archive_name, upload_timestamp):
     
 
 def send_logs():
-    instance_id = requests.get('http://169.254.169.254/latest/meta-data/instance-id').text
+    instance_id = ec2_metadata.instance_id
     
     ec2 = boto3.client('ec2', region_name='eu-west-1')
     instance_tags = ec2.describe_instances(InstanceIds=[instance_id])['Reservations'][0]['Instances'][0]['Tags']
