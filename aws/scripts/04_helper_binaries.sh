@@ -12,7 +12,7 @@ set -eux
 sudo apt-get -y install python3-pip python3-venv
 
 python3 -m venv /usr/local/lib/pyenv/versions/aws-automation
-eval "$(/usr/local/lib/pyenv/bin/pyenv activate aws-automation)"
+eval "$(/usr/local/lib/pyenv/bin/pyenv sh-activate aws-automation)"
 pip3 install boto3 psycopg2
 
 # Adjust python shebangs to venv python
