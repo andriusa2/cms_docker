@@ -1,25 +1,22 @@
 {
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-    "aws_secrete_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-    "debfile": "{{env `DEBFILE`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
     "region": "eu-west-1"
   },
   "builders": [
     {
-      "type": "amazon-chroot",
-      "nvme_device_path": "/dev/nvme1n1p",
-      "device_path": "/dev/sdf",
-      "access_key": "{{user `aws_access_key`}}",
+      "type": "amazon-ebs",
       "ami_name": "cms-release-{{isotime | clean_resource_name}}",
       "region": "{{user `region`}}",
-      "secret_key": "{{user `aws_secret_key`}}",
+      "instance_type": "t3.small",
+      "ssh_username": "admin",
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
-          "name": "*debian-10-*",
+          "name": "*debian-12-*",
           "root-device-type": "ebs",
-	  "architecture": "x86_64"
+          "architecture": "x86_64"
         },
         "owners": ["136693071363"],
         "most_recent": true
@@ -28,25 +25,70 @@
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "{{user `debfile`}}",
-      "destination": "/tmp/cms_aws-1_amd64.deb"
+      "type": "shell",
+      "inline": [
+        "mkdir -p /tmp/cms",
+        "mkdir -p /tmp/cms-misc-bin",
+        "mkdir -p /tmp/cms-misc-service",
+        "mkdir -p /tmp/nginx",
+        "mkdir -p /tmp/supervisor",
+        "mkdir -p /tmp/www",
+        "ls -l /tmp"
+      ]
     },
-	  {
+    {
       "type": "file",
-      "source": "send_logs/",
-      "destination": "/tmp/"
+      "source": "rootdir/usr/local/etc/",
+      "destination": "/tmp/cms"
+    },
+    {
+      "type": "file",
+      "source": "send_logs/cmsSendLogs",
+      "destination": "/tmp/cms-misc-bin/"
+    },
+    {
+      "type": "file",
+      "source": "send_logs/cms-send-logs.service",
+      "destination": "/tmp/cms-misc-service/"
+    },
+    {
+      "type": "file",
+      "source": "rootdir/etc/nginx/",
+      "destination": "/tmp/nginx"
+    },
+    {
+      "type": "file",
+      "source": "rootdir/etc/supervisor",
+      "destination": "/tmp/supervisor"
+    },
+    {
+      "type": "file",
+      "source": "rootdir/var/www",
+      "destination": "/tmp/www"
+    },
+    {
+      "type": "file",
+      "source": "dejavu-fonts-ttf-2.37.zip",
+      "destination": "/tmp/dejavu-fonts.zip"
+    },
+    {
+      "type": "file",
+      "source": "html-book-20230810.zip",
+      "destination": "/tmp/cppreference.zip"
     },
     {
       "type": "shell",
-      "inline": [
-        "apt-get update",
-        "apt install -y /tmp/cms_aws-1_amd64.deb",
-        "install -g root -o root -m 755 /tmp/cmsSendLogs /usr/local/bin/cmsSendLogs",
-        "install -g root -o root -m 644 /tmp/cms-send-logs.service /etc/systemd/system/cms-send-logs.service",
-        "systemctl daemon-reload",
-        "systemctl enable cms-send-logs"
-      ]
+      "scripts": [
+        "scripts/00_common_deps.sh",
+        "scripts/01_pyenv.sh",
+        "scripts/02_cms.sh",
+        "scripts/03_configs_and_webserving.sh",
+        "scripts/04_helper_binaries.sh"
+      ],
+      "env": {
+        "CMS_REPOSITORY": "lmio/cms",
+        "CMS_TAG": "lmio_v1.5"
+      }
     }
   ]
 }

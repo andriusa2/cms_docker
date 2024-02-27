@@ -73,14 +73,15 @@ configs: $(WORKER_CONF) $(CENTRIUKAS_CONF) $(CPPREFERENCE) $(DEJAVU)
 # Installs packer. Ideally this should go through package manager,
 # but for now this will have to do.
 packer:
-	curl -o packer.zip https://releases.hashicorp.com/packer/1.4.5/packer_1.4.5_linux_amd64.zip
+	curl -o packer.zip  https://releases.hashicorp.com/packer/1.10.1/packer_1.10.1_linux_amd64.zip
 	unzip -q packer.zip
 	rm packer.zip
+	./packer plugins install github.com/hashicorp/amazon
 
 # This needs to be run as root because packer will try to mount new volume.
-ami: $(DEBFILE) $(PACKER_CONF) packer
-	./packer validate -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
-	./packer build -var 'debfile=$(DEBFILE)' $(PACKER_CONF)
+ami: configs $(PACKER_CONF) packer
+	./packer validate $(PACKER_CONF)
+	./packer build $(PACKER_CONF)
 
 update-ami: $(DEBFILE) $(PACKER_UPDATE_CONF) packer
 	./packer validate -var 'debfile=$(DEBFILE)' $(PACKER_UPDATE_CONF)
