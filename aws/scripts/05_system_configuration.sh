@@ -7,12 +7,14 @@
 set -eux
 
 # Set system timezone to Europe/Vilnius
-timedatectl
+# Note that timedatectl set-timezone could be used, but this then leaves
+# /etc/timezone in inconsistent state. dpkg-reconfigure handles itself better.
 echo 'tzdata tzdata/Areas select Europe' | sudo debconf-set-selections
 echo 'tzdata tzdata/Zones/Europe select Vilnius' | sudo debconf-set-selections
 sudo rm /etc/timezone /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
-timedatectl
+cat /etc/timezone
+ls -l /etc/localtime
 
 # Add kernel boot line
 # This makes use of a debian-specific grub patch which exposes
