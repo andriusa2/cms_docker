@@ -70,6 +70,9 @@ $(CENTRIUKAS_CONF): $(MAIN_CONF)
 
 configs: $(WORKER_CONF) $(CENTRIUKAS_CONF) $(CPPREFERENCE) $(DEJAVU)
 
+local_install: configs
+	/bin/sh ./scripts/99_local_install.sh
+
 # Installs packer. Ideally this should go through package manager,
 # but for now this will have to do.
 packer:
