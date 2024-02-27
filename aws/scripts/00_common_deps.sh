@@ -6,4 +6,4 @@
 sudo apt-get update
 sudo apt-get install -y \
     curl dnsutils htop net-tools postgresql-client \
-    cloud-utils git patool subversion zip unzip 
+    cloud-utils cron git patool subversion zip unzip 

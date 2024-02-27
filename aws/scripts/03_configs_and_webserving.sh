@@ -27,6 +27,9 @@ sudo chmod -R u+rwX,go=rX /usr/share/doc/cppreference
 
 # Supervisor configs
 sudo install -o root -g root -m 664 /tmp/supervisor/supervisord.conf /etc/supervisor
+# Need to replace paths with venv-local ones or gevent breaks itself
+# TODO - make this less bad
+sed -e 's;/usr/local/bin/cms;/usr/local/lib/pyenv/versions/cms-venv/bin/cms;' -s -i /etc/supervisor/conf.d/*
 sudo install -o root -g root -m 664 -d /etc/supervisor/conf.d
 sudo install -o root -g root -m 664 /tmp/supervisor/conf.d/* /etc/supervisor/conf.d
 
