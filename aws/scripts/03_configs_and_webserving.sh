@@ -22,7 +22,7 @@ sudo cp -r /tmp/www/* /var/www/
 # the fonts.
 sudo unzip -q /tmp/cppreference.zip -d /usr/share/doc/ 'reference/*'
 sudo mv /usr/share/doc/reference /usr/share/doc/cppreference
-sudo unzip -q /tmp/dejavu-fonts.zip -d /usr/share/doc/cppreference/
+sudo unzip -q -o /tmp/dejavu-fonts.zip -d /usr/share/doc/cppreference/
 sudo chmod -R u+rwX,go=rX /usr/share/doc/cppreference
 
 # Supervisor configs

@@ -7,7 +7,11 @@
 set -eux
 
 # Set up venv with required dependencies.
-/usr/local/lib/pyenv/bin/pyenv virtualenv aws-automation
+# Note that because we don't care about version and just use system, we
+# use normal venv, but drop it in pyenv version list
+sudo apt-get -y install python3-pip python3-venv
+
+python3 -m venv /usr/local/lib/pyenv/versions/aws-automation
 eval "$(/usr/local/lib/pyenv/bin/pyenv activate aws-automation)"
 pip3 install boto3 psycopg2
 
