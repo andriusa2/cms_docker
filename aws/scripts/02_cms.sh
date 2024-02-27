@@ -44,7 +44,10 @@ eval "$(/usr/local/lib/pyenv/bin/pyenv sh-activate cms-venv)"
 CMS_PATH='/usr/local/lib/cms'
 sudo mkdir -p "${CMS_PATH}"
 sudo chown "${USER}" "${CMS_PATH}"
-git clone \
+# Pull cms repo and if that fails, attempt to clone.
+# This lets the current script to work for "reinstall" use case with minimal
+# effort.
+git -C "${CMS_PATH}" pull origin "${CMS_TAG}" || git clone \
   --recurse-submodules \
   --branch "${CMS_TAG}" \
   "https://github.com/${CMS_REPOSITORY}.git" "${CMS_PATH}"
