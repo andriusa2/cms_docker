@@ -43,6 +43,11 @@
     },
     {
       "type": "file",
+      "source": "rootdir/cms_init",
+      "destination": "/tmp/cms-misc-bin/"
+    },
+    {
+      "type": "file",
       "source": "send_logs/cmsSendLogs",
       "destination": "/tmp/cms-misc-bin/"
     },

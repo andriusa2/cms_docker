@@ -23,5 +23,4 @@ sudo install -o root -g root -m 755 /tmp/cms-misc-bin/* /usr/local/bin
 sudo install -o root -g root -m 644 /tmp/cms-misc-services/*.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable cms-send-logs
-sudo install -o root -g root /tmp/cms-misc-bin/cms_init /
-
+sudo install -o root -g root -m 755 /tmp/cms-misc-bin/cms_init /
