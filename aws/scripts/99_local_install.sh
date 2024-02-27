@@ -3,11 +3,11 @@
 set -eux
 
 # Precreate tmp dirs
-mkdir -p /tmp/{cms,cms-misc-bin,cms-misc-service,nginx,supervisor,www}
+mkdir -p /tmp/{cms,cms-misc-bin,cms-misc-services,nginx,supervisor,www}
 # Copy the files to expected tmp places
 cp -r rootdir/usr/local/etc/* /tmp/cms/
 cp -r send_logs/cmsSendLogs /tmp/cms-misc-bin/
-cp -r send_logs/cms-send-logs.service /tmp/cms-misc-service/
+cp -r send_logs/cms-send-logs.service /tmp/cms-misc-services/
 cp -r rootdir/etc/nginx/* /tmp/nginx/
 cp -r rootdir/etc/supervisor/* /tmp/supervisor/
 cp -r rootdir/var/www/* /tmp/www/
