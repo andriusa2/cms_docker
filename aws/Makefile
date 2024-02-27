@@ -4,8 +4,8 @@ GIT_CMS ?= git://github.com/andriusa2/cms.git -b lmio34-runtime --recursive
 # I opted for simplicity over security here. Keep it >8 characters.
 DBPASSWD ?= default1
 RWSPASSWD ?= default2
-
-metadata = curl -s -m 0.1 http://169.254.169.254/latest/meta-data
+TOKEN = $(shell curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+metadata = curl -H "X-aws-ec2-metadata-token: $(TOKEN)" -s -m 0.1 http://169.254.169.254/latest/meta-data
 REGION ?= $(shell $(metadata)/placement/availability-zone | \
 		head -c -1 || echo us-east-1)
 VPC_MAC ?= $(shell $(metadata)/network/interfaces/macs/ | head -n1 | tr -d '/')
