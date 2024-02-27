@@ -48,6 +48,9 @@ git clone \
   --branch "${CMS_TAG}" \
   "https://github.com/${CMS_REPOSITORY}.git" "${CMS_PATH}"
 
+# It looks like prerequisites.py at least require being in the same directory.
+# TODO - fix that.
+cd "$CMS_PATH"
 # https://cms.readthedocs.io/en/latest/Installation.html#preparation-steps
 # Note that we need to either forward our current PATH to sudo or fully
 # qualify the python interpreter to use to avoid using system python here.
@@ -55,16 +58,13 @@ git clone \
 # We are expected to install configs separately, so no point in using example
 # ones.
 sudo -E env "PATH=${PATH}" \
-  python3 "${CMS_PATH}/prerequisites.py" \
-  --no-conf \
-  -y \
-  install
+  python3 prerequisites.py --no-conf -y install
 
 # Now install CMS itself
 # https://cms.readthedocs.io/en/latest/Installation.html#method-2-virtual-environment
 export SETUPTOOLS_USE_DISTUTILS="stdlib"
-pip3 install -r "${CMS_PATH}/requirements.txt"
-python3 "${CMS_PATH}/setup.py" install
+pip3 install -r requirements.txt
+python3 setup.py install
 
 # Link CMS static files to /var/www/ as well to serve under nginx.
 CMS_EGG_PATH=$( pip3 show cms | grep Location: | cut -f2 -d' ' )
