@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Install cms under a pyenv controlled venv.
 # Caller can control the following environment variables:
 # - CMS_REPOSITORY - which github repository to use to checkout CMS from.
@@ -33,11 +33,11 @@ sudo apt-get install -y \
 # Set up pyenv controlled py3.9 version, cms has dependencies which can't run
 # on py3.10+.
 # NB - this picks the latest 3.9 prefixed release, see $ pyenv latest -k 3.9.
-pyenv install 3.9
+/usr/local/lib/pyenv/bin/pyenv install 3.9
 
 # Now set up and activate venv for it
-pyenv virtualenv 3.9 cms-venv
-pyenv activate cms-venv
+/usr/local/lib/pyenv/bin/pyenv virtualenv 3.9 cms-venv
+/usr/local/lib/pyenv/bin/pyenv activate cms-venv
 
 # Put CMS into /usr/local/lib/cms
 CMS_PATH='/usr/local/lib/cms'
