@@ -30,6 +30,7 @@ sudo apt-get install -y \
   libffi-dev libpq-dev libyaml-dev \
   gettext iso-codes shared-mime-info
 
+. ~/.pyenv_script
 # Set up pyenv controlled py3.9 version, cms has dependencies which can't run
 # on py3.10+.
 # NB - this picks the latest 3.9 prefixed release, see $ pyenv latest -k 3.9.

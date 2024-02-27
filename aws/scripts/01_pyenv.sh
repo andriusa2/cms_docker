@@ -27,5 +27,5 @@ git clone 'https://github.com/pyenv/pyenv-virtualenv.git' "$PYENV_ROOT/plugins/p
   echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"'
   # shellcheck disable=SC2016
   echo 'eval "$(pyenv init -)"'
-} | tee -a ~/.bashrc >> ~/.profile
+} | tee -a ~/.bashrc ~/.pyenv_script >> ~/.profile
 

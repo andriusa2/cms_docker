@@ -11,6 +11,7 @@ set -eux
 # use normal venv, but drop it in pyenv version list
 sudo apt-get -y install python3-pip python3-venv
 
+. ~/.pyenv_script
 python3 -m venv /usr/local/lib/pyenv/versions/aws-automation
 eval "$(/usr/local/lib/pyenv/bin/pyenv sh-activate aws-automation)"
 pip3 install boto3 ec2-metadata psycopg2 requests
