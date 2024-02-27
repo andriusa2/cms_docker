@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Mirrors packer_conf and sets local machine as contest one.
 set -eux
 
