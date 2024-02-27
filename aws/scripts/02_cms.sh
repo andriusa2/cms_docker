@@ -54,11 +54,10 @@ cd "$CMS_PATH"
 # https://cms.readthedocs.io/en/latest/Installation.html#preparation-steps
 # Note that we need to either forward our current PATH to sudo or fully
 # qualify the python interpreter to use to avoid using system python here.
-# PATH approach is probably good enough.
+# PATH approach breaks any sbin usage, so we get fully qualified python here.
 # We are expected to install configs separately, so no point in using example
 # ones.
-sudo -E env "PATH=${PATH}" \
-  python3 prerequisites.py --no-conf -y install
+sudo "${VIRTUAL_ENV}/bin/python3" prerequisites.py --no-conf -y install
 
 # Now install CMS itself
 # https://cms.readthedocs.io/en/latest/Installation.html#method-2-virtual-environment
