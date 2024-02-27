@@ -5,5 +5,5 @@
 
 sudo apt-get update
 sudo apt-get install -y \
-    curl dns-tools htop net-tools postgresql-client \
+    curl dnsutils htop net-tools postgresql-client \
     cloud-utils git patool subversion zip unzip 
