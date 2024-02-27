@@ -26,7 +26,7 @@ sudo unzip -q /tmp/dejavu-fonts.zip -d /usr/share/doc/cppreference/
 sudo chmod -R u+rwX,go=rX /usr/share/doc/cppreference
 
 # Supervisor configs
-sudo install -o root -g root -m 664 /tmp/supervisor/supervisor.conf /etc/supervisor
+sudo install -o root -g root -m 664 /tmp/supervisor/supervisord.conf /etc/supervisor
 sudo install -o root -g root -m 664 -d /etc/supervisor/conf.d
 sudo install -o root -g root -m 664 /tmp/supervisor/conf.d/* /etc/supervisor/conf.d
 
