@@ -16,9 +16,6 @@ git clone 'https://github.com/pyenv/pyenv-doctor.git' "$PYENV_ROOT/plugins/pyenv
 git clone 'https://github.com/pyenv/pyenv-update.git' "$PYENV_ROOT/plugins/pyenv-update"
 git clone 'https://github.com/pyenv/pyenv-virtualenv.git' "$PYENV_ROOT/plugins/pyenv-virtualenv"
 
-# Check that it works - init only prints how to set it up.
-"$PYENV_ROOT/bin/pyenv" init
-"$PYENV_ROOT/bin/pyenv" virtualenv-init
 # Check cpython build dependencies.
 "$PYENV_ROOT/bin/pyenv" doctor
 
