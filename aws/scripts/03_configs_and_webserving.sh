@@ -14,8 +14,8 @@ set -eux
 sudo apt-get install -y nginx supervisor unzip
 sudo install -o cmsuser -g cmsuser -m 664 /tmp/cms/* /usr/local/etc
 # There's some expectation of directory structure here.
-sudo chown -R root:cmsuser /tmp/www/
-sudo chmod -R 664 /tmp/www/
+sudo chown -R www-data:www-data /tmp/www/
+sudo chmod -R u+rwX,go=rX /tmp/www/
 sudo cp -r /tmp/www/* /var/www/
 
 # cppreference is a bit more annoying than usual here as we need to vendor
