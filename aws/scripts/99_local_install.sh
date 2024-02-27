@@ -11,8 +11,8 @@ cp -r send_logs/cms-send-logs.service /tmp/cms-misc-service/
 cp -r rootdir/etc/nginx/* /tmp/nginx/
 cp -r rootdir/etc/supervisor/* /tmp/supervisor/
 cp -r rootdir/var/www/* /tmp/www/
-cp dejavu-fonts-ttf-2.37.zip /tmp/
-cp html-book-20230810.zip /tmp/
+cp dejavu-fonts-ttf-2.37.zip /tmp/dejavu-fonts.zip
+cp html-book-20230810.zip /tmp/cppreference.zip
 /bin/bash scripts/00_common_deps.sh
 /bin/bash scripts/01_pyenv.sh
 /bin/bash scripts/02_cms.sh
