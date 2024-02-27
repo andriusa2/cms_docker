@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Install cms under a pyenv controlled venv.
 # Caller can control the following environment variables:
 # - CMS_REPOSITORY - which github repository to use to checkout CMS from.

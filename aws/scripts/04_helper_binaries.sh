@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Install a suite of helper binaries for automation/logging purposes.
 # All executables put to /tmp/cms-misc-bin will be installed into
 # /usr/local/bin.
