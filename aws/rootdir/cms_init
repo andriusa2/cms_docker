@@ -18,8 +18,25 @@ _hyperthreading() {
             echo 0 > /sys/devices/system/cpu/cpu$cpunum/online
     done
 
+}
+
+_set_workers() {
     # Adjust number of workers to be number of CPUs
-    sed -i "s/numprocs=.*/numprocs=$(nproc)/" /etc/supervisor/conf.d/worker.conf
+    sed -i "s/numprocs=.*/numprocs=$1/" /etc/supervisor/conf.d/worker.conf
+}
+
+_set_static_cpufreq() {
+    # hardcoding 2.4ghz which matches c7i.24xlarge base clock.
+    # TODO: fix this to be autodetected
+    echo passive > /sys/devices/system/cpu/intel_pstate/status
+    echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
+    echo 100 > /sys/devices/system/cpu/intel_pstate/min_perf_pct
+    cpupower frequency-set -d 2.4GHz -u 2.4GHz -g performance
+}
+
+_disable_transparent_hugepages() {
+    echo madvise > /sys/kernel/mm/transparent_hugepage/enabled
+    echo 0 > /sys/kernel/mm/transparent_hugepage/khugepaged/defrag
 }
 
 _enable() {
@@ -29,6 +46,16 @@ _enable() {
 case "$1" in
     worker)
         _hyperthreading
+        # Adjust number of workers to be number of CPUs
+        _set_workers($(nproc))
+        _disable_transparent_hugepages
+        _enable worker
+        ;; 
+    big-worker)
+        _hyperthreading
+        _set_workers 20
+        _disable_transparent_hugepages
+        _set_static_cpufreq
         _enable worker
         ;; 
     centriukas)
