@@ -47,7 +47,7 @@ case "$1" in
     worker)
         _hyperthreading
         # Adjust number of workers to be number of CPUs
-        _set_workers($(nproc))
+        _set_workers $(nproc)
         _disable_transparent_hugepages
         _enable worker
         ;; 

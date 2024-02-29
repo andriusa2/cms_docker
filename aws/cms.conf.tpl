@@ -19,8 +19,16 @@
             ["worker6.lmio", 26000], ["worker6.lmio", 26001],
             ["worker7.lmio", 26000], ["worker7.lmio", 26001],
             ["worker8.lmio", 26000], ["worker8.lmio", 26001],
-            ["worker9.lmio", 26000], ["worker9.lmio", 26001]
-
+            ["worker9.lmio", 26000], ["worker9.lmio", 26001],
+            ["worker9.lmio", 26002], ["worker9.lmio", 26003],
+            ["worker9.lmio", 26004], ["worker9.lmio", 26005],
+            ["worker9.lmio", 26006], ["worker9.lmio", 26007],
+            ["worker9.lmio", 26008], ["worker9.lmio", 26009],
+            ["worker9.lmio", 26010], ["worker9.lmio", 26011],
+            ["worker9.lmio", 26012], ["worker9.lmio", 26013],
+            ["worker9.lmio", 26014], ["worker9.lmio", 26015],
+            ["worker9.lmio", 26016], ["worker9.lmio", 26017],
+            ["worker9.lmio", 26018], ["worker9.lmio", 26019]
         ],
         "ContestWebServer":  [
 
