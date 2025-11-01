@@ -26,9 +26,12 @@ fi
 #   served via webserver.
 sudo apt-get install -y \
   build-essential postgresql-client zip \
-  libcap-dev \
   libffi-dev libpq-dev libyaml-dev \
-  gettext iso-codes shared-mime-info
+  gettext iso-codes shared-mime-info \
+
+# Isolate dependencies
+sudo apt-get install -y \
+  pkg-config libcap-dev libsystemd-dev
 
 . ~/.pyenv_script
 # Set up pyenv controlled py3.9 version, cms has dependencies which can't run
