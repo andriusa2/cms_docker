@@ -34,13 +34,11 @@ sudo apt-get install -y \
   pkg-config libcap-dev libsystemd-dev
 
 . ~/.pyenv_script
-# Set up pyenv controlled py3.9 version, cms has dependencies which can't run
-# on py3.10+.
-# NB - this picks the latest 3.9 prefixed release, see $ pyenv latest -k 3.9.
-/usr/local/lib/pyenv/bin/pyenv install -s 3.9
+
+/usr/local/lib/pyenv/bin/pyenv install -s 3.13
 
 # Now set up and activate venv for it
-/usr/local/lib/pyenv/bin/pyenv virtualenv -f 3.9 cms-venv
+/usr/local/lib/pyenv/bin/pyenv virtualenv -f 3.13 cms-venv
 eval "$(/usr/local/lib/pyenv/bin/pyenv sh-activate cms-venv)"
 
 # Put CMS into /usr/local/lib/cms
