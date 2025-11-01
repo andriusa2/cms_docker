@@ -74,9 +74,3 @@ CMS_EGG_PATH=$( pip3 show cms | grep Location: | cut -f2 -d' ' )
 sudo ln -s "${CMS_EGG_PATH}/cms/server/contest/static" "/var/www/cws_static"
 sudo ln -s "${CMS_EGG_PATH}/cms/server/admin/static" "/var/www/aws_static"
 sudo ln -s "${CMS_EGG_PATH}/cms/server/static" "/var/www/cms_static"
-
-# Link binaries to /usr/local/bin
-for bin in "${VIRTUAL_ENV}"/bin/cms*
-do
-  sudo ln -s "${bin}" /usr/local/bin/
-done
