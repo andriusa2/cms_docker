@@ -37,7 +37,7 @@ sudo apt-get install -y \
 /usr/local/lib/pyenv/bin/pyenv install -s 3.9
 
 # Now set up and activate venv for it
-/usr/local/lib/pyenv/bin/pyenv virtualenv 3.9 cms-venv
+/usr/local/lib/pyenv/bin/pyenv virtualenv -f 3.9 cms-venv
 eval "$(/usr/local/lib/pyenv/bin/pyenv sh-activate cms-venv)"
 
 # Put CMS into /usr/local/lib/cms
