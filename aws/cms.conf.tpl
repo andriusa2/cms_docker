@@ -65,6 +65,7 @@
     "max_submission_length": 5000000,
     "max_input_length": 5000000,
     "stl_path": "/usr/share/doc/cppreference/",
+    "python_doc_path": "/usr/share/doc/python3.13/html/"
     "allow_questions": true,
     "admin_listen_address": "",
     "admin_listen_port":    8889,
