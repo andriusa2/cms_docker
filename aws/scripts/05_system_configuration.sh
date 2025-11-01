@@ -16,11 +16,12 @@ sudo dpkg-reconfigure -f noninteractive tzdata
 cat /etc/timezone
 ls -l /etc/localtime
 
-# Add kernel boot line
+# Add kernel boot line files to be enabled selectively
 # This makes use of a debian-specific grub patch which exposes
 # /etc/default/grub.d/*.cfg as a directory for overrides.
 # See "default-grub-d.patch" and https://bugs.launchpad.net/bugs/901600
-sudo install -o root -g root -m 644 /tmp/grub/*.cfg /etc/default/grub.d/
+sudo mkdir -p /etc/default/grub.inactive.d
+sudo install -o root -g root -m 644 /tmp/grub/*.cfg /etc/default/grub.inactive.d/
 sudo update-grub
 
 # Add systemd-resolved overrides
