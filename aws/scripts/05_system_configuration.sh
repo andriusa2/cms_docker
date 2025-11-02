@@ -11,10 +11,7 @@ set -eux
 # /etc/timezone in inconsistent state. dpkg-reconfigure handles itself better.
 echo 'tzdata tzdata/Areas select Europe' | sudo debconf-set-selections
 echo 'tzdata tzdata/Zones/Europe select Vilnius' | sudo debconf-set-selections
-sudo rm /etc/timezone /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
-cat /etc/timezone
-ls -l /etc/localtime
 
 # Add kernel boot line files to be enabled selectively
 # This makes use of a debian-specific grub patch which exposes
