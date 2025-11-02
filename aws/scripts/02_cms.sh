@@ -78,6 +78,6 @@ python3 setup.py install
 
 # Link CMS static files to /var/www/ as well to serve under nginx.
 CMS_EGG_PATH=$( pip3 show cms | grep Location: | cut -f2 -d' ' )
-sudo ln -s "${CMS_EGG_PATH}/cms/server/contest/static" "/var/www/cws_static"
-sudo ln -s "${CMS_EGG_PATH}/cms/server/admin/static" "/var/www/aws_static"
-sudo ln -s "${CMS_EGG_PATH}/cms/server/static" "/var/www/cms_static"
+sudo ln -fs "${CMS_EGG_PATH}/cms/server/contest/static" "/var/www/cws_static"
+sudo ln -fs "${CMS_EGG_PATH}/cms/server/admin/static" "/var/www/aws_static"
+sudo ln -fs "${CMS_EGG_PATH}/cms/server/static" "/var/www/cms_static"
