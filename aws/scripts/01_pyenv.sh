@@ -6,7 +6,7 @@ set -eux
 sudo apt-get install -y git build-essential libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev curl \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
-    python3-venv
+    python3-venv python3-dev
 
 # Set up pyenv under /usr/local/lib/pyenv
 PYENV_ROOT=/usr/local/lib/pyenv
