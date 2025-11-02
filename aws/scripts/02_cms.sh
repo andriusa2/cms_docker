@@ -66,7 +66,6 @@ sudo "${VIRTUAL_ENV}/bin/python3" prerequisites.py --no-conf -y install
 
 # Now install CMS itself
 # https://cms.readthedocs.io/en/latest/Installation.html#method-2-virtual-environment
-export SETUPTOOLS_USE_DISTUTILS="stdlib"
 pip3 install -r requirements.txt
 python3 setup.py install
 
