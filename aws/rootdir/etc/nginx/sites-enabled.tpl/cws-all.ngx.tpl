@@ -9,6 +9,18 @@ server {
         proxy_pass http://127.0.0.1:8081;
     }
 
+    #location /leaderboard/ {
+    #    proxy_pass http://rws.lmio:8085/;
+    #    proxy_buffering off;
+    #    client_max_body_size 100M;
+    #}
+    #
+    #location /rezultatai/ {
+    #    proxy_pass http://rws.lmio:8086/;
+    #    proxy_buffering off;
+    #    client_max_body_size 100M;
+    #}
+
     location /centriukas/ {
         proxy_pass http://127.0.0.1:8889/;
         client_max_body_size 100M;
