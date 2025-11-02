@@ -11,7 +11,11 @@
 
 set -eux
 
-sudo apt-get install -y nginx supervisor unzip
+sudo apt-get install -y nginx supervisor unzip python3-doc
+# There are some .gz files that current CMS router doesn't know how to serve,
+# so gunzip them.
+find /usr/share/doc/python3.13/html/ -type f -name "*.gz" \
+    -exec gunzip -kf {} ';'
 sudo install -o cmsuser -g cmsuser -m 664 /tmp/cms/* /usr/local/etc
 # There's some expectation of directory structure here.
 sudo chown -R www-data:www-data /tmp/www/
