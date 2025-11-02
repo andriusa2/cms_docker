@@ -5,10 +5,16 @@ set -eux
 # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
 sudo apt-get install -y git build-essential libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev curl \
-    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev \
+    python3-venv
 
 # Set up pyenv under /usr/local/lib/pyenv
 PYENV_ROOT=/usr/local/lib/pyenv
+
+if [ -d "$PYENV_ROOT" ]; then
+  echo "$PYENV_ROOT exists, skiping pyenv setup."
+  exit 0
+fi
 sudo mkdir -p "$PYENV_ROOT"
 sudo chown "$USER" "$PYENV_ROOT"
 git clone 'https://github.com/pyenv/pyenv.git' "$PYENV_ROOT"

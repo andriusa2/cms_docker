@@ -17,9 +17,7 @@ cp -r rootdir/cms_init /tmp/cms-misc-bin/cms_init
 cp dejavu-fonts-ttf-2.37.zip /tmp/dejavu-fonts.zip
 cp html-book-20230810.zip /tmp/cppreference.zip
 /bin/bash scripts/00_common_deps.sh
-if [ -z "${PYENV_INSTALLED}" ]; then
-  /bin/bash scripts/01_pyenv.sh
-fi
+/bin/bash scripts/01_pyenv.sh
 /bin/bash scripts/02_cms.sh
 /bin/bash scripts/03_configs_and_webserving.sh
 /bin/bash scripts/04_helper_binaries.sh
