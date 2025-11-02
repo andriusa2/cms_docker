@@ -17,6 +17,7 @@ sudo install -o cmsuser -g cmsuser -m 664 /tmp/cms/* /usr/local/etc
 sudo chown -R www-data:www-data /tmp/www/
 sudo chmod -R u+rwX,go=rX /tmp/www/
 sudo cp -r /tmp/www/* /var/www/
+sudo chown -R $USER:$USER /tmp/www/
 
 # cppreference is a bit more annoying than usual here as we need to vendor
 # the fonts.
