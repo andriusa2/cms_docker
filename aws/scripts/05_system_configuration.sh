@@ -9,6 +9,10 @@ set -eux
 # Set system timezone to Europe/Vilnius
 # Note that timedatectl set-timezone could be used, but this then leaves
 # /etc/timezone in inconsistent state. dpkg-reconfigure handles itself better.
+# Need to remove /etc/localtime or it will override tzdata selectors.
+if [ -f /etc/localtime ]; then
+  sudo rm /etc/localtime
+fi
 echo 'tzdata tzdata/Areas select Europe' | sudo debconf-set-selections
 echo 'tzdata tzdata/Zones/Europe select Vilnius' | sudo debconf-set-selections
 sudo dpkg-reconfigure -f noninteractive tzdata
