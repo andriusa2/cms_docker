@@ -67,7 +67,7 @@ sudo "${VIRTUAL_ENV}/bin/python3" prerequisites.py --no-conf -y install
 # Install multiple isolate binaries and systemd unit.
 # This probably should be done via isolate deb package instead.
 sudo make -C "${CMS_PATH}/isolate" install
-sudo install -o root -g root -m 644 "${CMS_PATH}/isolate/*" /etc/systemd/system
+sudo install -o root -g root -m 644 "${CMS_PATH}/isolate/systemd"/* /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable isolate
 
