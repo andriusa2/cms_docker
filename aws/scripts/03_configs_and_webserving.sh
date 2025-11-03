@@ -27,7 +27,8 @@ sudo chown -R $USER:$USER /tmp/www/
 # the fonts.
 sudo unzip -q /tmp/cppreference.zip -d /usr/share/doc/ 'reference/*'
 sudo mv /usr/share/doc/reference /usr/share/doc/cppreference
-sudo unzip -q -o /tmp/dejavu-fonts.zip -d /usr/share/doc/cppreference/
+# Unzip the required fonts into the root directory for vendoring.
+sudo unzip -q -j -o /tmp/dejavu-fonts.zip '*.ttf' -d /usr/share/doc/cppreference/
 sudo chmod -R u+rwX,go=rX /usr/share/doc/cppreference
 
 # Supervisor configs
